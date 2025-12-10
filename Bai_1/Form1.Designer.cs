@@ -133,6 +133,8 @@
             Controls.Add(label1);
             Controls.Add(btnDN);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximumSize = new Size(445, 326);
+            MinimumSize = new Size(445, 326);
             Name = "Form1";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
