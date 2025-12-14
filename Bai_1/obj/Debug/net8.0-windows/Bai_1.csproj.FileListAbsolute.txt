@@ -68,3 +68,4 @@ C:\Users\minht\source\repos\Bai_1\Bai_1\obj\Debug\net8.0-windows\Bai_1.Chi_Tieu.
 C:\Users\minht\source\repos\Bai_1\Bai_1\obj\Debug\net8.0-windows\Bai_1.Home_Page.resources
 C:\Users\minht\source\repos\Bai_1\Bai_1\obj\Debug\net8.0-windows\Bai_1.DoiMatKhau.resources
 C:\Users\minht\source\repos\Bai_1\Bai_1\obj\Debug\net8.0-windows\Bai_1.QL_User.resources
+C:\Users\minht\source\repos\Bai_1\Bai_1\obj\Debug\net8.0-windows\Bai_1.DSHySu.resources

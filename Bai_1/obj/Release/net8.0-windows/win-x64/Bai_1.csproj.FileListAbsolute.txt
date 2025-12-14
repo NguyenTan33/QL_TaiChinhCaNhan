@@ -62,3 +62,4 @@ C:\Users\minht\source\repos\Bai_1\Bai_1\obj\Release\net8.0-windows\win-x64\Bai_1
 C:\Users\minht\source\repos\Bai_1\Bai_1\obj\Release\net8.0-windows\win-x64\Bai_1.genruntimeconfig.cache
 C:\Users\minht\source\repos\Bai_1\Bai_1\obj\Release\net8.0-windows\win-x64\ref\Bai_1.dll
 C:\Users\minht\source\repos\Bai_1\Bai_1\obj\Release\net8.0-windows\win-x64\Bai_1.QL_User.resources
+C:\Users\minht\source\repos\Bai_1\Bai_1\obj\Release\net8.0-windows\win-x64\Bai_1.DSHySu.resources

@@ -40,7 +40,22 @@ CREATE TABLE ChiTieu
     AccountID INT NOT NULL,
     FOREIGN KEY (AccountID) REFERENCES Account(ID)
 );
+
+CREATE TABLE DamCuoi
+(
+    ID INT IDENTITY(1,1) PRIMARY KEY,
+    Ten NVARCHAR(75) NOT NULL,
+    TienMung DECIMAL(18,2) NOT NULL DEFAULT 0,
+    GhiChu nvarchar (250),
+    ThamGia BIT,
+    DiaChi nvarchar(250),
+    AccountID INT NOT NULL,
+    FOREIGN KEY (AccountID) REFERENCES Account(ID)
+);
 go
+
+
+--================================Bảng Thu Nhập===============================
 
 CREATE TRIGGER trg_ThuNhap_Add
 ON ThuNhap
@@ -84,6 +99,9 @@ BEGIN
 END;
 GO
 
+
+--================================Trigger===============================
+
 CREATE TRIGGER trg_ChiTieu_Update
 ON ChiTieu
 AFTER UPDATE
@@ -123,9 +141,9 @@ BEGIN
 END;
 GO
 
-Exec sp_Account_Them @TaiKhoan ='TanHeo123',@MatKhau ='Admin123@'
 
-go
+--===============================Tài Khoản===============================
+
 CREATE PROCEDURE sp_Account_Check
     @TaiKhoan VARCHAR(50),
     @MatKhau VARCHAR(200)
@@ -175,6 +193,12 @@ BEGIN
     FROM Account;
 END;
 go
+
+Exec sp_Account_Them @TaiKhoan ='TanHeo123',@MatKhau ='Admin123@'
+go
+
+
+--===============================Thu Nhập===============================
 
 CREATE PROCEDURE sp_ThuNhap_Insert
     @Luong DECIMAL(18,2),
@@ -227,6 +251,10 @@ BEGIN
     FROM ThuNhap WHERE AccountID = @AccountID ORDER BY Ngay DESC;
 END;
 go
+
+
+
+--=============================Chi Tiêu===============================
 
 CREATE PROCEDURE sp_ChiTieu_Insert
     @DanhMuc NVARCHAR(150),
@@ -351,6 +379,8 @@ BEGIN
 END;
 GO
 
+--=============================Báo Cáo===============================
+
 CREATE PROCEDURE sp_BaoCaoTongQuat
     @AccountID INT
 AS
@@ -409,3 +439,105 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE sp_XemDSKhachMoi
+AS
+BEGIN
+    -- Phần code xử lý của bạn nằm ở đây
+    SELECT 
+        ID,
+        Ten AS [Tên],
+        TienMung AS [Tiền Mừng],
+        GhiChu AS [Ghi Chú],
+        CASE 
+            WHEN ThamGia = 1 THEN N'Có'
+            ELSE N'Không'
+        END AS [Tham Gia],
+        DiaChi AS [Địa Chỉ]
+    FROM DamCuoi;
+END;
+GO
+
+CREATE PROCEDURE sp_TimKiemTheoTen
+    @AccountID INT,             
+    @TenCanTim NVARCHAR(75)      
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT 
+        ID,
+        Ten AS [Tên],
+        TienMung AS [Tiền Mừng],
+        GhiChu AS [Ghi Chú],
+        CASE 
+            WHEN ThamGia = 1 THEN N'Có'
+            ELSE N'Không'
+        END AS [Tham Gia],
+        DiaChi AS [Địa Chỉ]
+    FROM DamCuoi
+    WHERE AccountID = @AccountID 
+      AND Ten LIKE N'%' + @TenCanTim + '%'; 
+END;
+GO
+
+EXEC sp_TimKiemTheoTen @AccountID = 1, @TenCanTim = N'Huy';
+
+CREATE PROCEDURE sp_DamCuoi_Them
+    @Ten NVARCHAR(75),
+    @TienMung DECIMAL(18,2),
+    @GhiChu NVARCHAR(250),
+    @ThamGia BIT,
+    @DiaChi NVARCHAR(250),
+    @AccountID INT
+AS
+BEGIN
+    INSERT INTO DamCuoi (Ten, TienMung, GhiChu, ThamGia, DiaChi, AccountID)
+    VALUES (@Ten, @TienMung, @GhiChu, @ThamGia, @DiaChi, @AccountID);
+END;
+GO
+
+CREATE PROCEDURE sp_DamCuoi_Sua
+    @ID INT,
+    @Ten NVARCHAR(75),
+    @TienMung DECIMAL(18,2),
+    @GhiChu NVARCHAR(250),
+    @ThamGia BIT,
+    @DiaChi NVARCHAR(250)
+AS
+BEGIN
+    UPDATE DamCuoi
+    SET
+        Ten = @Ten,
+        TienMung = @TienMung,
+        GhiChu = @GhiChu,
+        ThamGia = @ThamGia,
+        DiaChi = @DiaChi
+    WHERE ID = @ID;
+END;
+GO
+
+CREATE PROCEDURE sp_DamCuoi_Xoa
+    @ID INT
+AS
+BEGIN
+    DELETE FROM DamCuoi
+    WHERE ID = @ID;
+END;
+GO
+
+--EXEC sp_DamCuoi_Them
+--    @Ten = N'Nguyễn Văn A',
+--    @TienMung = 500000,
+--    @GhiChu = N'Mừng cưới bên nhà gái',
+--    @ThamGia = 1,
+--    @DiaChi = N'Hà Nội',
+--    @AccountID = 1;
+--EXEC sp_DamCuoi_Sua
+--    @ID = 1,
+--    @Ten = N'Nguyễn Văn B',
+--    @TienMung = 700000,
+--    @GhiChu = N'Đi cùng nhóm bạn',
+--    @ThamGia = 0,
+--    @DiaChi = N'Hồ Chí Minh';
+--EXEC sp_DamCuoi_Xoa
+--    @ID = 1;

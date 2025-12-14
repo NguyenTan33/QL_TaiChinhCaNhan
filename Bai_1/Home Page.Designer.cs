@@ -39,9 +39,6 @@
             ChiTieu = new ToolStripMenuItem();
             thôngTinToolStripMenuItem = new ToolStripMenuItem();
             DKVSD = new ToolStripMenuItem();
-            HDSD = new ToolStripMenuItem();
-            BanQuyen = new ToolStripMenuItem();
-            LienHe = new ToolStripMenuItem();
             label1 = new Label();
             btnInBaoCao = new Button();
             groupBox1 = new GroupBox();
@@ -63,6 +60,7 @@
             txtCTNN = new TextBox();
             txtTT = new TextBox();
             txtTNNN = new TextBox();
+            khóaMànHìnhToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -79,10 +77,10 @@
             // 
             // adminToolStripMenuItem
             // 
-            adminToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { QL_User, DoiMk, Out });
+            adminToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { QL_User, DoiMk, khóaMànHìnhToolStripMenuItem, Out });
             adminToolStripMenuItem.Name = "adminToolStripMenuItem";
-            adminToolStripMenuItem.Size = new Size(67, 24);
-            adminToolStripMenuItem.Text = "Admin";
+            adminToolStripMenuItem.Size = new Size(72, 24);
+            adminToolStripMenuItem.Text = "Cài Đặt";
             // 
             // QL_User
             // 
@@ -109,8 +107,8 @@
             // 
             thuChiToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ThuNhap, ChiTieu });
             thuChiToolStripMenuItem.Name = "thuChiToolStripMenuItem";
-            thuChiToolStripMenuItem.Size = new Size(72, 24);
-            thuChiToolStripMenuItem.Text = "Thu Chi";
+            thuChiToolStripMenuItem.Size = new Size(128, 24);
+            thuChiToolStripMenuItem.Text = "Quản Lý Thu Chi";
             thuChiToolStripMenuItem.Click += thuChiToolStripMenuItem_Click;
             // 
             // ThuNhap
@@ -129,52 +127,35 @@
             // 
             // thôngTinToolStripMenuItem
             // 
-            thôngTinToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { DKVSD, HDSD, BanQuyen, LienHe });
+            thôngTinToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { DKVSD });
             thôngTinToolStripMenuItem.Name = "thôngTinToolStripMenuItem";
-            thôngTinToolStripMenuItem.Size = new Size(89, 24);
-            thôngTinToolStripMenuItem.Text = "Thông Tin";
+            thôngTinToolStripMenuItem.Size = new Size(131, 24);
+            thôngTinToolStripMenuItem.Text = "Quản Lý Sổ Sách";
             // 
             // DKVSD
             // 
             DKVSD.Name = "DKVSD";
-            DKVSD.Size = new Size(250, 26);
-            DKVSD.Text = "Điều Khoản Và Sử Dụng";
-            // 
-            // HDSD
-            // 
-            HDSD.Name = "HDSD";
-            HDSD.Size = new Size(250, 26);
-            HDSD.Text = "Hướng Dẫn Sử Dụng";
-            // 
-            // BanQuyen
-            // 
-            BanQuyen.Name = "BanQuyen";
-            BanQuyen.Size = new Size(250, 26);
-            BanQuyen.Text = "Bản Quyền";
-            // 
-            // LienHe
-            // 
-            LienHe.Name = "LienHe";
-            LienHe.Size = new Size(250, 26);
-            LienHe.Text = "Liên Hệ";
+            DKVSD.Size = new Size(131, 26);
+            DKVSD.Text = "Hỷ Sự";
+            DKVSD.Click += DKVSD_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Times New Roman", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.DarkOrange;
-            label1.Location = new Point(324, 34);
+            label1.Location = new Point(256, 64);
             label1.Name = "label1";
-            label1.Size = new Size(164, 45);
+            label1.Size = new Size(313, 45);
             label1.TabIndex = 2;
-            label1.Text = "Báo Cáo";
+            label1.Text = "Báo Cáo Thu Chi";
             label1.Click += label1_Click;
             // 
             // btnInBaoCao
             // 
             btnInBaoCao.BackColor = Color.Chartreuse;
             btnInBaoCao.ForeColor = Color.DarkSlateGray;
-            btnInBaoCao.Location = new Point(694, 50);
+            btnInBaoCao.Location = new Point(694, 31);
             btnInBaoCao.Name = "btnInBaoCao";
             btnInBaoCao.Size = new Size(94, 29);
             btnInBaoCao.TabIndex = 3;
@@ -203,7 +184,7 @@
             groupBox1.Controls.Add(txtCTNN);
             groupBox1.Controls.Add(txtTT);
             groupBox1.Controls.Add(txtTNNN);
-            groupBox1.Location = new Point(12, 82);
+            groupBox1.Location = new Point(12, 132);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(776, 306);
             groupBox1.TabIndex = 4;
@@ -373,6 +354,13 @@
             txtTNNN.Size = new Size(243, 27);
             txtTNNN.TabIndex = 0;
             // 
+            // khóaMànHìnhToolStripMenuItem
+            // 
+            khóaMànHìnhToolStripMenuItem.Name = "khóaMànHìnhToolStripMenuItem";
+            khóaMànHìnhToolStripMenuItem.Size = new Size(230, 26);
+            khóaMànHìnhToolStripMenuItem.Text = "Khóa Màn Hình";
+            khóaMànHìnhToolStripMenuItem.Click += khóaMànHìnhToolStripMenuItem_Click;
+            // 
             // Home_Page
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -411,9 +399,6 @@
         private ToolStripMenuItem ChiTieu;
         private ToolStripMenuItem thôngTinToolStripMenuItem;
         private ToolStripMenuItem DKVSD;
-        private ToolStripMenuItem HDSD;
-        private ToolStripMenuItem BanQuyen;
-        private ToolStripMenuItem LienHe;
         private ToolStripMenuItem User;
         private Label label1;
         private Button btnInBaoCao;
@@ -436,5 +421,6 @@
         private TextBox txtTT;
         private TextBox txtTNNN;
         private Label label10;
+        private ToolStripMenuItem khóaMànHìnhToolStripMenuItem;
     }
 }

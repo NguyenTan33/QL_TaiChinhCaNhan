@@ -145,5 +145,21 @@ namespace Bai_1
         {
 
         }
+
+        private void DKVSD_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            DSHySu DsHySu = new DSHySu();
+            DsHySu.ShowDialog();
+            this.Close();
+        }
+
+        private void khóaMànHìnhToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form1 Dnhap = new Form1();
+            Dnhap.ShowDialog();
+            this.Close();
+        }
     }
 }
