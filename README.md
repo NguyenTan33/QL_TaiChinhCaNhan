@@ -1,5 +1,5 @@
 Download the file, then run SQL, and then open Bai_1.slnx.
-<img width="1152" height="677" alt="ảnh" src="https://github.com/user-attachments/assets/8c8fde3a-a8aa-498b-8980-56bb8e29b60e" />
+<img width="1001" height="712" alt="ảnh" src="https://github.com/user-attachments/assets/de5d9c1e-d322-449c-bd83-b9810f3e20ee" />
 <img width="432" height="330" alt="ảnh" src="https://github.com/user-attachments/assets/948e5596-d898-4a07-9e58-252a6e2ae5b9" />
 <img width="803" height="489" alt="ảnh" src="https://github.com/user-attachments/assets/48c9ddf2-4c2b-4af0-94a5-113cb7577357" />
 <img width="491" height="286" alt="ảnh" src="https://github.com/user-attachments/assets/c34b4331-1f0f-4477-93c1-5a47789cf564" />
