@@ -118,6 +118,7 @@
             btnDK.TabIndex = 7;
             btnDK.Text = "Đăng Ký";
             btnDK.UseVisualStyleBackColor = false;
+            btnDK.Click += btnDK_Click_1;
             // 
             // Form1
             // 

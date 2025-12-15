@@ -21,7 +21,7 @@ namespace Bai_1
 
         public void Reload()
         {
-            string sql = "exec sp_XemDSKhachMoi";
+            string sql = $"EXEC sp_XemDSKhachMoi @AccountID = {SaveIdUser.AccountID};";
             ResultStyle.ApplyStyle(dataGridView1);
             dataGridView1.DataSource = dt.TruyVan(sql);
         }

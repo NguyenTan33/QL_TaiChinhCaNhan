@@ -17,7 +17,7 @@
             if (CheckValidation.TaiKhoan(TK) && CheckValidation.MatKhau(MK) && Passed != -1)
             {
                 SaveIdUser.AccountID = Passed;
-                SaveIdUser.AccountUserName = TK ;
+                SaveIdUser.AccountUserName = TK;
                 this.Hide();
                 Home_Page TrangChu = new Home_Page();
                 TrangChu.ShowDialog();
@@ -47,6 +47,14 @@
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnDK_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            Dki DKi = new Dki();
+            DKi.ShowDialog();
+            this.Close();
         }
     }
 }
