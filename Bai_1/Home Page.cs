@@ -16,14 +16,14 @@ namespace Bai_1
     public partial class Home_Page : Form
     {
         DataModel dt = new DataModel();
-
+        SaveDLReport Dl = new SaveDLReport();
 
 
         public Home_Page()
         {
             InitializeComponent();
             PhanQuyen();
-            LoadBaoCao(SaveIdUser.AccountID);
+            LoadBaoCao();
         }
         public void PhanQuyen()
         {
@@ -78,39 +78,27 @@ namespace Bai_1
             DoiMK.ShowDialog();
             this.Close();
         }
-        private void LoadBaoCao(int accountId)
+        private void LoadBaoCao()
         {
             DataModel dataModel = new DataModel();
+            SaveDLReport report = dataModel.GetBaoCaoTongQuat(SaveIdUser.AccountID);
 
-            // Lấy đối tượng báo cáo từ DataModel
-            SaveDLReport report = dataModel.GetBaoCaoTongQuat(accountId);
-
-            // Kiểm tra xem có dữ liệu trả về không
             if (report != null)
             {
-                // Định dạng tiền tệ (Ví dụ: "N0" là định dạng số nguyên có dấu phân cách hàng nghìn)
                 string format = "N0";
-
-                // --- Cột THU ---
                 txtTT.Text = report.TongThu.ToString(format);
                 txtTNTB.Text = report.ThuTrungBinh.ToString(format);
                 txtTNNN.Text = report.ThuNhieuNhat.ToString(format);
                 txtTNTN.Text = report.ThuItNhat.ToString(format);
-
-                // --- Cột CHI ---
                 txtTC.Text = report.TongChi.ToString(format);
                 txtCTTB.Text = report.ChiTrungBinh.ToString(format);
                 txtCTNN.Text = report.ChiNhieuNhat.ToString(format);
                 txtCTTN.Text = report.ChiItNhat.ToString(format);
-
-                // --- Tiền còn lại ---
                 txtTienCon.Text = report.TienHienCo.ToString(format);
             }
             else
             {
-                // Xử lý khi không có dữ liệu (ví dụ: người dùng mới)
                 MessageBox.Show("Không tìm thấy dữ liệu báo cáo cho tài khoản này.");
-                // Bạn có thể đặt tất cả các TextBox về "0" hoặc "" ở đây
             }
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -120,8 +108,83 @@ namespace Bai_1
 
         private void btnInBaoCao_Click(object sender, EventArgs e)
         {
-        }
+            PrintDocument printer = new PrintDocument();
 
+            printer.DefaultPageSettings.PaperSize =
+                new PaperSize("A6", 378, 567);
+
+            printer.DefaultPageSettings.Margins =
+                new Margins(0, 0, 0, 0);
+            printer.PrintPage += In;
+
+            PrintDialog dlg = new PrintDialog();
+            dlg.Document = printer;
+            dlg.AllowSomePages = false;
+            dlg.AllowSelection = false;
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                printer.Print();
+            }
+        }
+        private void In(object sender, PrintPageEventArgs e)
+        {
+            DataModel dataModel = new DataModel();
+            SaveDLReport report = dataModel.GetBaoCaoTongQuat(SaveIdUser.AccountID);
+
+            DateTime now = DateTime.Now;
+            string format = "N0";
+
+            Graphics g = e.Graphics;
+
+            Font f1 = new Font("Times New Roman", 14, FontStyle.Bold);
+            Font f2 = new Font("Times New Roman", 10);
+
+            float x = 15, y = 10, line = 24;
+
+            string title = "Báo Cáo Thu Chi";
+            float pageWidth = e.PageBounds.Width;
+            SizeF titleSize = g.MeasureString(title, f1);
+            float xTitle = (pageWidth - titleSize.Width) / 2;
+
+            g.DrawString($"{now}", f2, Brushes.Black, x*18, y);
+            y += line;
+
+            g.DrawString(title, f1, Brushes.Black, xTitle, y);
+            y += line * 2;
+
+            g.DrawString($"Thu Nhiều Nhất: {report.ThuNhieuNhat.ToString(format)} VNĐ", f2, Brushes.Black, x, y);
+            y += line;
+
+            g.DrawString($"Thu Trung Bình: {report.ThuTrungBinh.ToString(format)} VNĐ", f2, Brushes.Black, x, y);
+            y += line;
+
+            g.DrawString($"Thu Ít Nhất: {report.ThuItNhat.ToString(format)} VNĐ", f2, Brushes.Black, x, y);
+            y += line;
+
+            g.DrawString($"Chi Nhiều Nhất: {report.ChiNhieuNhat.ToString(format)} VNĐ", f2, Brushes.Black, x, y);
+            y += line;
+
+            g.DrawString($"Chi Trung Bình: {report.ChiTrungBinh.ToString(format)} VNĐ", f2, Brushes.Black, x, y);
+            y += line;
+
+            g.DrawString($"Chi Ít Nhất: {report.ChiItNhat.ToString(format)} VNĐ", f2, Brushes.Black, x, y);
+            y += line;
+
+            g.DrawString($"----------------------------------------------------------------------------------", f2, Brushes.Black, x, y);
+            y += line;
+
+            g.DrawString($"Tổng thu: {report.TongThu.ToString(format)} VNĐ", f2, Brushes.Black, x, y);
+            y += line;
+
+            g.DrawString($"Tổng Chi: {report.TongChi.ToString(format)} VNĐ", f2, Brushes.Black, x, y);
+            y += line;
+
+            g.DrawString($"Tiền Còn Lại: {report.TienHienCo.ToString(format)} VNĐ", f2, Brushes.Black, x, y);
+            y += line;
+
+            g.DrawString($"----------------------------------------------------------------------------------", f2, Brushes.Black, x, y);
+        }
         private void printDoc_PrintPage(object sender, PrintPageEventArgs e)
         {
         }

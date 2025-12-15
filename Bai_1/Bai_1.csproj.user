@@ -7,6 +7,9 @@
     <Compile Update="Chi_Tieu.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Dki.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="DoiMatKhau.cs">
       <SubType>Form</SubType>
     </Compile>

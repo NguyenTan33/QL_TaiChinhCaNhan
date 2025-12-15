@@ -33,6 +33,7 @@
             adminToolStripMenuItem = new ToolStripMenuItem();
             QL_User = new ToolStripMenuItem();
             DoiMk = new ToolStripMenuItem();
+            khóaMànHìnhToolStripMenuItem = new ToolStripMenuItem();
             Out = new ToolStripMenuItem();
             thuChiToolStripMenuItem = new ToolStripMenuItem();
             ThuNhap = new ToolStripMenuItem();
@@ -60,7 +61,6 @@
             txtCTNN = new TextBox();
             txtTT = new TextBox();
             txtTNNN = new TextBox();
-            khóaMànHìnhToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -95,6 +95,13 @@
             DoiMk.Size = new Size(230, 26);
             DoiMk.Text = "Đổi Mật Khẩu";
             DoiMk.Click += DoiMk_Click;
+            // 
+            // khóaMànHìnhToolStripMenuItem
+            // 
+            khóaMànHìnhToolStripMenuItem.Name = "khóaMànHìnhToolStripMenuItem";
+            khóaMànHìnhToolStripMenuItem.Size = new Size(230, 26);
+            khóaMànHìnhToolStripMenuItem.Text = "Khóa Màn Hình";
+            khóaMànHìnhToolStripMenuItem.Click += khóaMànHìnhToolStripMenuItem_Click;
             // 
             // Out
             // 
@@ -154,10 +161,11 @@
             // btnInBaoCao
             // 
             btnInBaoCao.BackColor = Color.Chartreuse;
+            btnInBaoCao.Font = new Font("Times New Roman", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnInBaoCao.ForeColor = Color.DarkSlateGray;
-            btnInBaoCao.Location = new Point(694, 31);
+            btnInBaoCao.Location = new Point(677, 31);
             btnInBaoCao.Name = "btnInBaoCao";
-            btnInBaoCao.Size = new Size(94, 29);
+            btnInBaoCao.Size = new Size(111, 29);
             btnInBaoCao.TabIndex = 3;
             btnInBaoCao.Text = "In Báo Cáo";
             btnInBaoCao.UseVisualStyleBackColor = false;
@@ -353,13 +361,6 @@
             txtTNNN.Name = "txtTNNN";
             txtTNNN.Size = new Size(243, 27);
             txtTNNN.TabIndex = 0;
-            // 
-            // khóaMànHìnhToolStripMenuItem
-            // 
-            khóaMànHìnhToolStripMenuItem.Name = "khóaMànHìnhToolStripMenuItem";
-            khóaMànHìnhToolStripMenuItem.Size = new Size(230, 26);
-            khóaMànHìnhToolStripMenuItem.Text = "Khóa Màn Hình";
-            khóaMànHìnhToolStripMenuItem.Click += khóaMànHìnhToolStripMenuItem_Click;
             // 
             // Home_Page
             // 

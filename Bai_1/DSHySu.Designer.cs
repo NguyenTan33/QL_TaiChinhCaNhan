@@ -34,8 +34,8 @@
             label2 = new Label();
             dataGridView1 = new DataGridView();
             groupBox1 = new GroupBox();
-            btnOut = new Button();
             btnAllSearch = new Button();
+            btnOut = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -60,12 +60,14 @@
             // 
             // btnSearch
             // 
+            btnSearch.BackColor = Color.LimeGreen;
+            btnSearch.Font = new Font("Times New Roman", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSearch.Location = new Point(417, 24);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(94, 29);
             btnSearch.TabIndex = 2;
             btnSearch.Text = "Tìm Kiếm";
-            btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.UseVisualStyleBackColor = false;
             btnSearch.Click += btnSearch_Click;
             // 
             // label2
@@ -88,6 +90,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.BackColor = Color.White;
             groupBox1.Controls.Add(btnAllSearch);
             groupBox1.Controls.Add(txtSearch);
             groupBox1.Controls.Add(btnSearch);
@@ -97,25 +100,28 @@
             groupBox1.TabIndex = 5;
             groupBox1.TabStop = false;
             // 
-            // btnOut
-            // 
-            btnOut.Location = new Point(12, 6);
-            btnOut.Name = "btnOut";
-            btnOut.Size = new Size(40, 29);
-            btnOut.TabIndex = 6;
-            btnOut.Text = "<--";
-            btnOut.UseVisualStyleBackColor = true;
-            btnOut.Click += btnOut_Click;
-            // 
             // btnAllSearch
             // 
+            btnAllSearch.BackColor = Color.Peru;
+            btnAllSearch.Font = new Font("Times New Roman", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAllSearch.Location = new Point(525, 24);
             btnAllSearch.Name = "btnAllSearch";
             btnAllSearch.Size = new Size(94, 29);
             btnAllSearch.TabIndex = 3;
             btnAllSearch.Text = "Tất Cả";
-            btnAllSearch.UseVisualStyleBackColor = true;
+            btnAllSearch.UseVisualStyleBackColor = false;
             btnAllSearch.Click += btnAllSearch_Click;
+            // 
+            // btnOut
+            // 
+            btnOut.BackColor = Color.Tan;
+            btnOut.Location = new Point(12, 6);
+            btnOut.Name = "btnOut";
+            btnOut.Size = new Size(40, 29);
+            btnOut.TabIndex = 6;
+            btnOut.Text = "<--";
+            btnOut.UseVisualStyleBackColor = false;
+            btnOut.Click += btnOut_Click;
             // 
             // DSHySu
             // 
@@ -127,6 +133,8 @@
             Controls.Add(dataGridView1);
             Controls.Add(label2);
             Controls.Add(label1);
+            MaximumSize = new Size(949, 590);
+            MinimumSize = new Size(949, 590);
             Name = "DSHySu";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
