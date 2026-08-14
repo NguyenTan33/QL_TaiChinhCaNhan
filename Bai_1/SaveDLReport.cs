@@ -12,10 +12,12 @@ namespace Bai_1
         public decimal ThuTrungBinh { get; set; }
         public decimal ThuNhieuNhat { get; set; }
         public decimal ThuItNhat { get; set; }
+
         public decimal TongChi { get; set; }
         public decimal ChiTrungBinh { get; set; }
         public decimal ChiNhieuNhat { get; set; }
         public decimal ChiItNhat { get; set; }
+
         public decimal TienHienCo { get; set; }
     }
 }

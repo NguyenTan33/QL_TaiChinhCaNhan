@@ -51,13 +51,13 @@
             dataGridView1.Location = new Point(12, 41);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(663, 190);
+            dataGridView1.Size = new Size(463, 190);
             dataGridView1.TabIndex = 1;
             // 
             // button1
             // 
             button1.BackColor = Color.Silver;
-            button1.Location = new Point(627, 6);
+            button1.Location = new Point(427, 6);
             button1.Name = "button1";
             button1.Size = new Size(48, 29);
             button1.TabIndex = 2;
@@ -70,15 +70,15 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(687, 243);
+            ClientSize = new Size(487, 243);
             Controls.Add(button1);
             Controls.Add(dataGridView1);
             Controls.Add(label1);
-            MaximumSize = new Size(705, 290);
-            MinimumSize = new Size(705, 290);
+            MaximumSize = new Size(505, 290);
+            MinimumSize = new Size(505, 290);
             Name = "QL_User";
-            ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
+            Text = "Quản Lý Người Dùng";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();

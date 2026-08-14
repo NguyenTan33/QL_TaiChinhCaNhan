@@ -1,30 +1,26 @@
-﻿using Microsoft.Data.SqlClient;
-using Microsoft.Identity.Client;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Drawing.Printing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bai_1
 {
     public partial class Home_Page : Form
     {
-        DataModel dt = new DataModel();
-        SaveDLReport Dl = new SaveDLReport();
-
+        private DataModel _dt = new DataModel();
 
         public Home_Page()
         {
             InitializeComponent();
-            PhanQuyen();
-            LoadBaoCao();
         }
+
+        private void Home_Page_Load(object sender, EventArgs e)
+        {
+            _dt.EnsureUserDefaultWallet(SaveIdUser.AccountID);
+            PhanQuyen();
+            LoadDashboard();
+        }
+
         public void PhanQuyen()
         {
             if (SaveIdUser.AccountID != 1)
@@ -32,189 +28,112 @@ namespace Bai_1
                 QL_User.Visible = false;
             }
         }
-        private void Home_Page_Load(object sender, EventArgs e)
-        {
 
+        private void LoadDashboard()
+        {
+            _dt.EnsureUserDefaultWallet(SaveIdUser.AccountID);
+
+            lblWelcome.Text = $"🏠 CHÀO MỪNG {SaveIdUser.AccountUserName.ToUpper()} TRỞ LẠI!";
+            lblViActive.Text = $"Ví đang chọn: {SaveIdUser.CurrentWalletName} ({SaveIdUser.CurrentWalletRole}) - Mã ví chung: {SaveIdUser.CurrentWalletCode}";
+
+            // Tải số liệu Dashboard Cards từ Stored Procedure sp_BaoCaoChuyenSau
+            DataTable dtBaoCao = _dt.TruyVan($"EXEC sp_BaoCaoChuyenSau @WalletID = {SaveIdUser.CurrentWalletID};");
+            if (dtBaoCao != null && dtBaoCao.Rows.Count > 0)
+            {
+                DataRow r = dtBaoCao.Rows[0];
+                decimal tienBanDau = Convert.ToDecimal(r["TienBanDau"]);
+                decimal tienHienCo = Convert.ToDecimal(r["TienHienCo"]);
+                decimal tongThu = Convert.ToDecimal(r["TongThu"]);
+                decimal tongChi = Convert.ToDecimal(r["TongChi"]);
+                decimal thangDu = Convert.ToDecimal(r["ThangDu"]);
+
+                lblV1.Text = $"{tienBanDau:N0} đ";
+                lblV2.Text = $"{tienHienCo:N0} đ";
+                lblV3.Text = $"{tongThu:N0} đ";
+                lblV4.Text = $"{tongChi:N0} đ";
+                lblV5.Text = $"{thangDu:N0} đ";
+
+                // Alert Banner
+                if (tongThu > 0 && (tongChi / tongThu) > 0.8m)
+                {
+                    lblAlertBanner.Text = "⚠️ CẢNH BÁO: Bạn đã chi hơn 80% thu nhập!";
+                    lblAlertBanner.ForeColor = Color.OrangeRed;
+                }
+                else if (tienHienCo < 1000000)
+                {
+                    lblAlertBanner.Text = "🔥 NGUY HIỂM: Số dư ví dưới 1 triệu VNĐ!";
+                    lblAlertBanner.ForeColor = Color.Red;
+                }
+                else
+                {
+                    lblAlertBanner.Text = "✅ TRẠNG THÁI: Tài chính khả quan!";
+                    lblAlertBanner.ForeColor = Color.Gold;
+                }
+            }
+
+            // Load Biểu Đồ Thống Kê Chi Tiêu Tỷ Trọng Theo Danh Mục
+            LoadVisualCategoryChart();
+        }
+
+        private void LoadVisualCategoryChart()
+        {
+            string sql = $@"
+                SELECT 
+                    c.DanhMuc AS [Danh Mục Chi Tiêu],
+                    SUM(c.SoTien) AS [Tổng Tiền Chi (VNĐ)],
+                    COUNT(*) AS [Số Lần Chi],
+                    CAST(ROUND(SUM(c.SoTien) * 100.0 / NULLIF((SELECT SUM(SoTien) FROM ChiTieu WHERE WalletID = {SaveIdUser.CurrentWalletID}), 0), 1) AS NVARCHAR(20)) + '%' AS [Tỷ Trọng (%)],
+                    REPLICATE('█', CAST(ROUND(SUM(c.SoTien) * 20.0 / NULLIF((SELECT SUM(SoTien) FROM ChiTieu WHERE WalletID = {SaveIdUser.CurrentWalletID}), 0), 0) AS INT)) AS [Biểu Đồ Trực Quan]
+                FROM ChiTieu c
+                WHERE c.WalletID = {SaveIdUser.CurrentWalletID}
+                GROUP BY c.DanhMuc
+                ORDER BY [Tổng Tiền Chi (VNĐ)] DESC;";
+
+            DataTable dt = _dt.TruyVan(sql);
+            ResultStyle.ApplyStyle(dgvVisualChart);
+            dgvVisualChart.DataSource = dt;
         }
 
         private void ThuNhap_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Thu_Nhap ThuNhap = new Thu_Nhap();
-            ThuNhap.ShowDialog();
-            this.Close();
+            Thu_Nhap ThuNhapForm = new Thu_Nhap();
+            ThuNhapForm.ShowDialog();
+            LoadDashboard();
         }
 
         private void ChiTieu_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Chi_Tieu ChiTieu = new Chi_Tieu();
-            ChiTieu.ShowDialog();
-            this.Close();
+            Chi_Tieu ChiTieuForm = new Chi_Tieu();
+            ChiTieuForm.ShowDialog();
+            LoadDashboard();
         }
 
         private void Out_Click(object sender, EventArgs e)
         {
-            DialogResult Ok = MessageBox.Show("Bạn có chắc muốn thoát ?", "Thông Báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult Ok = MessageBox.Show("Bạn có chắc muốn thoát ứng dụng?", "Thông Báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (Ok == DialogResult.Yes)
             {
-                this.Close();
+                Application.Exit();
             }
         }
 
         private void QL_User_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            QL_User QL_User = new QL_User();
-            QL_User.ShowDialog();
-            this.Close();
-
+            QL_User QL_UserForm = new QL_User();
+            QL_UserForm.ShowDialog();
+            LoadDashboard();
         }
 
         private void DoiMk_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            DoiMatKhau DoiMK = new DoiMatKhau();
-            DoiMK.ShowDialog();
-            this.Close();
-        }
-        private void LoadBaoCao()
-        {
-            DataModel dataModel = new DataModel();
-            SaveDLReport report = dataModel.GetBaoCaoTongQuat(SaveIdUser.AccountID);
-
-            if (report != null)
-            {
-                string format = "N0";
-                txtTT.Text = report.TongThu.ToString(format);
-                txtTNTB.Text = report.ThuTrungBinh.ToString(format);
-                txtTNNN.Text = report.ThuNhieuNhat.ToString(format);
-                txtTNTN.Text = report.ThuItNhat.ToString(format);
-                txtTC.Text = report.TongChi.ToString(format);
-                txtCTTB.Text = report.ChiTrungBinh.ToString(format);
-                txtCTNN.Text = report.ChiNhieuNhat.ToString(format);
-                txtCTTN.Text = report.ChiItNhat.ToString(format);
-                txtTienCon.Text = report.TienHienCo.ToString(format);
-            }
-            else
-            {
-                MessageBox.Show("Không tìm thấy dữ liệu báo cáo cho tài khoản này.");
-            }
-        }
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void btnInBaoCao_Click(object sender, EventArgs e)
-        {
-            PrintDocument printer = new PrintDocument();
-
-            printer.DefaultPageSettings.PaperSize =
-                new PaperSize("A6", 378, 567);
-
-            printer.DefaultPageSettings.Margins =
-                new Margins(0, 0, 0, 0);
-            printer.PrintPage += In;
-
-            PrintDialog dlg = new PrintDialog();
-            dlg.Document = printer;
-            dlg.AllowSomePages = false;
-            dlg.AllowSelection = false;
-
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                printer.Print();
-            }
-        }
-        private void In(object sender, PrintPageEventArgs e)
-        {
-            DataModel dataModel = new DataModel();
-            SaveDLReport report = dataModel.GetBaoCaoTongQuat(SaveIdUser.AccountID);
-
-            DateTime now = DateTime.Now;
-            string format = "N0";
-
-            Graphics g = e.Graphics;
-
-            Font f1 = new Font("Times New Roman", 14, FontStyle.Bold);
-            Font f2 = new Font("Times New Roman", 10);
-
-            float x = 15, y = 10, line = 24;
-
-            string title = "Báo Cáo Thu Chi";
-            float pageWidth = e.PageBounds.Width;
-            SizeF titleSize = g.MeasureString(title, f1);
-            float xTitle = (pageWidth - titleSize.Width) / 2;
-
-            g.DrawString($"{now}", f2, Brushes.Black, x*18, y);
-            y += line;
-
-            g.DrawString(title, f1, Brushes.Black, xTitle, y);
-            y += line * 2;
-
-            g.DrawString($"Thu Nhiều Nhất: {report.ThuNhieuNhat.ToString(format)} VNĐ", f2, Brushes.Black, x, y);
-            y += line;
-
-            g.DrawString($"Thu Trung Bình: {report.ThuTrungBinh.ToString(format)} VNĐ", f2, Brushes.Black, x, y);
-            y += line;
-
-            g.DrawString($"Thu Ít Nhất: {report.ThuItNhat.ToString(format)} VNĐ", f2, Brushes.Black, x, y);
-            y += line;
-
-            g.DrawString($"Chi Nhiều Nhất: {report.ChiNhieuNhat.ToString(format)} VNĐ", f2, Brushes.Black, x, y);
-            y += line;
-
-            g.DrawString($"Chi Trung Bình: {report.ChiTrungBinh.ToString(format)} VNĐ", f2, Brushes.Black, x, y);
-            y += line;
-
-            g.DrawString($"Chi Ít Nhất: {report.ChiItNhat.ToString(format)} VNĐ", f2, Brushes.Black, x, y);
-            y += line;
-
-            g.DrawString($"----------------------------------------------------------------------------------", f2, Brushes.Black, x, y);
-            y += line;
-
-            g.DrawString($"Tổng thu: {report.TongThu.ToString(format)} VNĐ", f2, Brushes.Black, x, y);
-            y += line;
-
-            g.DrawString($"Tổng Chi: {report.TongChi.ToString(format)} VNĐ", f2, Brushes.Black, x, y);
-            y += line;
-
-            g.DrawString($"Tiền Còn Lại: {report.TienHienCo.ToString(format)} VNĐ", f2, Brushes.Black, x, y);
-            y += line;
-
-            g.DrawString($"----------------------------------------------------------------------------------", f2, Brushes.Black, x, y);
-        }
-        private void printDoc_PrintPage(object sender, PrintPageEventArgs e)
-        {
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void thuChiToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
+            DoiMatKhau DoiMKForm = new DoiMatKhau();
+            DoiMKForm.ShowDialog();
         }
 
         private void DKVSD_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            DSHySu DsHySu = new DSHySu();
-            DsHySu.ShowDialog();
-            this.Close();
+            DSHySu DsHySuForm = new DSHySu();
+            DsHySuForm.ShowDialog();
         }
 
         private void khóaMànHìnhToolStripMenuItem_Click(object sender, EventArgs e)
@@ -223,6 +142,47 @@ namespace Bai_1
             Form1 Dnhap = new Form1();
             Dnhap.ShowDialog();
             this.Close();
+        }
+
+        private void khoiTaoViToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormKhoiTaoVi formVi = new FormKhoiTaoVi();
+            formVi.ShowDialog();
+            LoadDashboard();
+        }
+
+        private void baoCaoXinXoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormBaoCaoTaiChinh formBaoCao = new FormBaoCaoTaiChinh();
+            formBaoCao.ShowDialog();
+            LoadDashboard();
+        }
+
+        private void aiAdvisorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormAIChatbox formAI = new FormAIChatbox();
+            formAI.ShowDialog();
+        }
+
+        private void nganSachToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormQuanLyNganSach formNS = new FormQuanLyNganSach();
+            formNS.ShowDialog();
+            LoadDashboard();
+        }
+
+        private void dauTuVayNoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormDauTuVayNo formDTVN = new FormDauTuVayNo();
+            formDTVN.ShowDialog();
+            LoadDashboard();
+        }
+
+        private void phanTichToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormPhanTichDuLieu formPT = new FormPhanTichDuLieu();
+            formPT.ShowDialog();
+            LoadDashboard();
         }
     }
 }

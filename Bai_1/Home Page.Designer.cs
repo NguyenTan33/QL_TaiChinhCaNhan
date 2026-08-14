@@ -1,16 +1,14 @@
-﻿namespace Bai_1
+using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace Bai_1
 {
     partial class Home_Page
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,369 +20,437 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home_Page));
-            menuStrip1 = new MenuStrip();
-            adminToolStripMenuItem = new ToolStripMenuItem();
-            QL_User = new ToolStripMenuItem();
-            DoiMk = new ToolStripMenuItem();
-            khóaMànHìnhToolStripMenuItem = new ToolStripMenuItem();
-            Out = new ToolStripMenuItem();
-            thuChiToolStripMenuItem = new ToolStripMenuItem();
-            ThuNhap = new ToolStripMenuItem();
-            ChiTieu = new ToolStripMenuItem();
-            thôngTinToolStripMenuItem = new ToolStripMenuItem();
-            DKVSD = new ToolStripMenuItem();
-            label1 = new Label();
-            btnInBaoCao = new Button();
-            groupBox1 = new GroupBox();
-            label10 = new Label();
-            label9 = new Label();
-            label8 = new Label();
-            label7 = new Label();
-            label6 = new Label();
-            label5 = new Label();
-            label4 = new Label();
-            label3 = new Label();
-            label2 = new Label();
-            txtTNTB = new TextBox();
-            txtTienCon = new TextBox();
-            txtCTTB = new TextBox();
-            txtTC = new TextBox();
-            txtCTTN = new TextBox();
-            txtTNTN = new TextBox();
-            txtCTNN = new TextBox();
-            txtTT = new TextBox();
-            txtTNNN = new TextBox();
-            menuStrip1.SuspendLayout();
-            groupBox1.SuspendLayout();
-            SuspendLayout();
-            // 
+            this.menuStrip1 = new MenuStrip();
+            this.adminToolStripMenuItem = new ToolStripMenuItem();
+            this.QL_User = new ToolStripMenuItem();
+            this.DoiMk = new ToolStripMenuItem();
+            this.khóaMànHìnhToolStripMenuItem = new ToolStripMenuItem();
+            this.Out = new ToolStripMenuItem();
+            this.thuChiToolStripMenuItem = new ToolStripMenuItem();
+            this.khoiTaoViToolStripMenuItem = new ToolStripMenuItem();
+            this.ThuNhap = new ToolStripMenuItem();
+            this.ChiTieu = new ToolStripMenuItem();
+            this.nganSachToolStripMenuItem = new ToolStripMenuItem();
+            this.dauTuVayNoToolStripMenuItem = new ToolStripMenuItem();
+            this.phanTichToolStripMenuItem = new ToolStripMenuItem();
+            this.baoCaoXinXoToolStripMenuItem = new ToolStripMenuItem();
+            this.aiAdvisorToolStripMenuItem = new ToolStripMenuItem();
+            this.thôngTinToolStripMenuItem = new ToolStripMenuItem();
+            this.DKVSD = new ToolStripMenuItem();
+
+            this.pnlHeader = new Panel();
+            this.lblWelcome = new Label();
+            this.lblViActive = new Label();
+            this.lblAlertBanner = new Label();
+
+            // Cards Panel
+            this.pnlCards = new Panel();
+            this.cardTienBanDau = new Panel();
+            this.lblT1 = new Label();
+            this.lblV1 = new Label();
+            this.cardTienHienCo = new Panel();
+            this.lblT2 = new Label();
+            this.lblV2 = new Label();
+            this.cardTongThu = new Panel();
+            this.lblT3 = new Label();
+            this.lblV3 = new Label();
+            this.cardTongChi = new Panel();
+            this.lblT4 = new Label();
+            this.lblV4 = new Label();
+            this.cardThangDu = new Panel();
+            this.lblT5 = new Label();
+            this.lblV5 = new Label();
+
+            // Quick Shortcuts Panel
+            this.grpShortcuts = new GroupBox();
+            this.btnNavKhoiTaoVi = new Button();
+            this.btnNavThuNhap = new Button();
+            this.btnNavChiTieu = new Button();
+            this.btnNavNganSach = new Button();
+            this.btnNavBaoCao = new Button();
+            this.btnNavAIChat = new Button();
+            this.btnNavHySu = new Button();
+
+            // Visual Chart & Breakdown Section
+            this.grpBieuDo = new GroupBox();
+            this.dgvVisualChart = new DataGridView();
+
+            this.menuStrip1.SuspendLayout();
+            this.pnlHeader.SuspendLayout();
+            this.pnlCards.SuspendLayout();
+            this.cardTienBanDau.SuspendLayout();
+            this.cardTienHienCo.SuspendLayout();
+            this.cardTongThu.SuspendLayout();
+            this.cardTongChi.SuspendLayout();
+            this.cardThangDu.SuspendLayout();
+            this.grpShortcuts.SuspendLayout();
+            this.grpBieuDo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVisualChart)).BeginInit();
+            this.SuspendLayout();
+
             // menuStrip1
-            // 
-            menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { adminToolStripMenuItem, thuChiToolStripMenuItem, thôngTinToolStripMenuItem });
-            menuStrip1.Location = new Point(0, 0);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 28);
-            menuStrip1.TabIndex = 0;
-            menuStrip1.Text = "menuStrip1";
-            // 
+            this.menuStrip1.ImageScalingSize = new Size(20, 20);
+            this.menuStrip1.Items.AddRange(new ToolStripItem[] {
+                this.adminToolStripMenuItem,
+                this.thuChiToolStripMenuItem,
+                this.thôngTinToolStripMenuItem
+            });
+            this.menuStrip1.Location = new Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new Size(1030, 28);
+            this.menuStrip1.TabIndex = 0;
+
             // adminToolStripMenuItem
-            // 
-            adminToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { QL_User, DoiMk, khóaMànHìnhToolStripMenuItem, Out });
-            adminToolStripMenuItem.Name = "adminToolStripMenuItem";
-            adminToolStripMenuItem.Size = new Size(72, 24);
-            adminToolStripMenuItem.Text = "Cài Đặt";
-            // 
-            // QL_User
-            // 
-            QL_User.Name = "QL_User";
-            QL_User.Size = new Size(230, 26);
-            QL_User.Text = "Quản Lý Người Dùng";
-            QL_User.Click += QL_User_Click;
-            // 
-            // DoiMk
-            // 
-            DoiMk.Name = "DoiMk";
-            DoiMk.Size = new Size(230, 26);
-            DoiMk.Text = "Đổi Mật Khẩu";
-            DoiMk.Click += DoiMk_Click;
-            // 
-            // khóaMànHìnhToolStripMenuItem
-            // 
-            khóaMànHìnhToolStripMenuItem.Name = "khóaMànHìnhToolStripMenuItem";
-            khóaMànHìnhToolStripMenuItem.Size = new Size(230, 26);
-            khóaMànHìnhToolStripMenuItem.Text = "Khóa Màn Hình";
-            khóaMànHìnhToolStripMenuItem.Click += khóaMànHìnhToolStripMenuItem_Click;
-            // 
-            // Out
-            // 
-            Out.Name = "Out";
-            Out.Size = new Size(230, 26);
-            Out.Text = "Thoát";
-            Out.Click += Out_Click;
-            // 
+            this.adminToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] {
+                this.QL_User,
+                this.DoiMk,
+                this.khóaMànHìnhToolStripMenuItem,
+                this.Out
+            });
+            this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
+            this.adminToolStripMenuItem.Size = new Size(72, 24);
+            this.adminToolStripMenuItem.Text = "Cài Đặt";
+
+            this.QL_User.Name = "QL_User";
+            this.QL_User.Size = new Size(230, 26);
+            this.QL_User.Text = "Quản Lý Người Dùng";
+            this.QL_User.Click += new EventHandler(this.QL_User_Click);
+
+            this.DoiMk.Name = "DoiMk";
+            this.DoiMk.Size = new Size(230, 26);
+            this.DoiMk.Text = "Đổi Mật Khẩu";
+            this.DoiMk.Click += new EventHandler(this.DoiMk_Click);
+
+            this.khóaMànHìnhToolStripMenuItem.Name = "khóaMànHìnhToolStripMenuItem";
+            this.khóaMànHìnhToolStripMenuItem.Size = new Size(230, 26);
+            this.khóaMànHìnhToolStripMenuItem.Text = "Khóa Màn Hình";
+            this.khóaMànHìnhToolStripMenuItem.Click += new EventHandler(this.khóaMànHìnhToolStripMenuItem_Click);
+
+            this.Out.Name = "Out";
+            this.Out.Size = new Size(230, 26);
+            this.Out.Text = "Thoát";
+            this.Out.Click += new EventHandler(this.Out_Click);
+
             // thuChiToolStripMenuItem
-            // 
-            thuChiToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ThuNhap, ChiTieu });
-            thuChiToolStripMenuItem.Name = "thuChiToolStripMenuItem";
-            thuChiToolStripMenuItem.Size = new Size(128, 24);
-            thuChiToolStripMenuItem.Text = "Quản Lý Thu Chi";
-            thuChiToolStripMenuItem.Click += thuChiToolStripMenuItem_Click;
-            // 
-            // ThuNhap
-            // 
-            ThuNhap.Name = "ThuNhap";
-            ThuNhap.Size = new Size(156, 26);
-            ThuNhap.Text = "Thu Nhập";
-            ThuNhap.Click += ThuNhap_Click;
-            // 
-            // ChiTieu
-            // 
-            ChiTieu.Name = "ChiTieu";
-            ChiTieu.Size = new Size(156, 26);
-            ChiTieu.Text = "Chi Tiêu";
-            ChiTieu.Click += ChiTieu_Click;
-            // 
+            this.thuChiToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] {
+                this.khoiTaoViToolStripMenuItem,
+                this.ThuNhap,
+                this.ChiTieu,
+                this.nganSachToolStripMenuItem,
+                this.dauTuVayNoToolStripMenuItem,
+                this.phanTichToolStripMenuItem,
+                this.baoCaoXinXoToolStripMenuItem,
+                this.aiAdvisorToolStripMenuItem
+            });
+            this.thuChiToolStripMenuItem.Name = "thuChiToolStripMenuItem";
+            this.thuChiToolStripMenuItem.Size = new Size(128, 24);
+            this.thuChiToolStripMenuItem.Text = "Quản Lý Thu Chi";
+
+            this.phanTichToolStripMenuItem.Name = "phanTichToolStripMenuItem";
+            this.phanTichToolStripMenuItem.Size = new Size(260, 26);
+            this.phanTichToolStripMenuItem.Text = "📈 Phân Tích Dữ Liệu (6 Biểu Đồ)";
+            this.phanTichToolStripMenuItem.Click += new EventHandler(this.phanTichToolStripMenuItem_Click);
+
+            this.dauTuVayNoToolStripMenuItem.Name = "dauTuVayNoToolStripMenuItem";
+            this.dauTuVayNoToolStripMenuItem.Size = new Size(260, 26);
+            this.dauTuVayNoToolStripMenuItem.Text = "💎 Đầu Tư & Theo Dõi Vay Nợ";
+            this.dauTuVayNoToolStripMenuItem.Click += new EventHandler(this.dauTuVayNoToolStripMenuItem_Click);
+
+            this.khoiTaoViToolStripMenuItem.Name = "khoiTaoViToolStripMenuItem";
+            this.khoiTaoViToolStripMenuItem.Size = new Size(260, 26);
+            this.khoiTaoViToolStripMenuItem.Text = "💼 Tiền Ban Đầu & Ví Gia Đình";
+            this.khoiTaoViToolStripMenuItem.Click += new EventHandler(this.khoiTaoViToolStripMenuItem_Click);
+
+            this.ThuNhap.Name = "ThuNhap";
+            this.ThuNhap.Size = new Size(260, 26);
+            this.ThuNhap.Text = "💵 Thu Nhập";
+            this.ThuNhap.Click += new EventHandler(this.ThuNhap_Click);
+
+            this.ChiTieu.Name = "ChiTieu";
+            this.ChiTieu.Size = new Size(260, 26);
+            this.ChiTieu.Text = "📉 Chi Tiêu";
+            this.ChiTieu.Click += new EventHandler(this.ChiTieu_Click);
+
+            this.nganSachToolStripMenuItem.Name = "nganSachToolStripMenuItem";
+            this.nganSachToolStripMenuItem.Size = new Size(260, 26);
+            this.nganSachToolStripMenuItem.Text = "🎯 Quản Lý Ngân Sách";
+            this.nganSachToolStripMenuItem.Click += new EventHandler(this.nganSachToolStripMenuItem_Click);
+
+            this.baoCaoXinXoToolStripMenuItem.Name = "baoCaoXinXoToolStripMenuItem";
+            this.baoCaoXinXoToolStripMenuItem.Size = new Size(260, 26);
+            this.baoCaoXinXoToolStripMenuItem.Text = "📊 Báo Cáo Tài Chính Xịn Xò";
+            this.baoCaoXinXoToolStripMenuItem.Click += new EventHandler(this.baoCaoXinXoToolStripMenuItem_Click);
+
+            this.aiAdvisorToolStripMenuItem.Name = "aiAdvisorToolStripMenuItem";
+            this.aiAdvisorToolStripMenuItem.Size = new Size(260, 26);
+            this.aiAdvisorToolStripMenuItem.Text = "🤖 AI Advisor & Chatbox";
+            this.aiAdvisorToolStripMenuItem.Click += new EventHandler(this.aiAdvisorToolStripMenuItem_Click);
+
             // thôngTinToolStripMenuItem
-            // 
-            thôngTinToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { DKVSD });
-            thôngTinToolStripMenuItem.Name = "thôngTinToolStripMenuItem";
-            thôngTinToolStripMenuItem.Size = new Size(131, 24);
-            thôngTinToolStripMenuItem.Text = "Quản Lý Sổ Sách";
-            // 
-            // DKVSD
-            // 
-            DKVSD.Name = "DKVSD";
-            DKVSD.Size = new Size(131, 26);
-            DKVSD.Text = "Hỷ Sự";
-            DKVSD.Click += DKVSD_Click;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Times New Roman", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.DarkOrange;
-            label1.Location = new Point(256, 64);
-            label1.Name = "label1";
-            label1.Size = new Size(313, 45);
-            label1.TabIndex = 2;
-            label1.Text = "Báo Cáo Thu Chi";
-            label1.Click += label1_Click;
-            // 
-            // btnInBaoCao
-            // 
-            btnInBaoCao.BackColor = Color.Chartreuse;
-            btnInBaoCao.Font = new Font("Times New Roman", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnInBaoCao.ForeColor = Color.DarkSlateGray;
-            btnInBaoCao.Location = new Point(677, 31);
-            btnInBaoCao.Name = "btnInBaoCao";
-            btnInBaoCao.Size = new Size(111, 29);
-            btnInBaoCao.TabIndex = 3;
-            btnInBaoCao.Text = "In Báo Cáo";
-            btnInBaoCao.UseVisualStyleBackColor = false;
-            btnInBaoCao.Click += btnInBaoCao_Click;
-            // 
-            // groupBox1
-            // 
-            groupBox1.BackColor = Color.CadetBlue;
-            groupBox1.Controls.Add(label10);
-            groupBox1.Controls.Add(label9);
-            groupBox1.Controls.Add(label8);
-            groupBox1.Controls.Add(label7);
-            groupBox1.Controls.Add(label6);
-            groupBox1.Controls.Add(label5);
-            groupBox1.Controls.Add(label4);
-            groupBox1.Controls.Add(label3);
-            groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(txtTNTB);
-            groupBox1.Controls.Add(txtTienCon);
-            groupBox1.Controls.Add(txtCTTB);
-            groupBox1.Controls.Add(txtTC);
-            groupBox1.Controls.Add(txtCTTN);
-            groupBox1.Controls.Add(txtTNTN);
-            groupBox1.Controls.Add(txtCTNN);
-            groupBox1.Controls.Add(txtTT);
-            groupBox1.Controls.Add(txtTNNN);
-            groupBox1.Location = new Point(12, 132);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(776, 306);
-            groupBox1.TabIndex = 4;
-            groupBox1.TabStop = false;
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Times New Roman", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label10.Location = new Point(605, 33);
-            label10.Name = "label10";
-            label10.Size = new Size(82, 19);
-            label10.TabIndex = 17;
-            label10.Text = "Tiền Còn:";
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Times New Roman", 10.2F, FontStyle.Bold);
-            label9.Location = new Point(27, 34);
-            label9.Name = "label9";
-            label9.Size = new Size(84, 19);
-            label9.TabIndex = 16;
-            label9.Text = "Tổng Thu:";
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Times New Roman", 10.2F, FontStyle.Bold);
-            label8.Location = new Point(318, 34);
-            label8.Name = "label8";
-            label8.Size = new Size(83, 19);
-            label8.TabIndex = 15;
-            label8.Text = "Tổng Chi:";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Times New Roman", 10.2F, FontStyle.Bold);
-            label7.Location = new Point(27, 165);
-            label7.Name = "label7";
-            label7.Size = new Size(111, 19);
-            label7.TabIndex = 14;
-            label7.Text = "Thu Nhập TB:";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Times New Roman", 10.2F, FontStyle.Bold);
-            label6.Location = new Point(318, 100);
-            label6.Name = "label6";
-            label6.Size = new Size(166, 19);
-            label6.TabIndex = 13;
-            label6.Text = "Chi Tiêu Nhiều Nhất:";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Times New Roman", 10.2F, FontStyle.Bold);
-            label5.Location = new Point(27, 239);
-            label5.Name = "label5";
-            label5.Size = new Size(164, 19);
-            label5.TabIndex = 12;
-            label5.Text = "Thu Nhập Thấp Nhất:";
-            label5.Click += label5_Click;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Times New Roman", 10.2F, FontStyle.Bold);
-            label4.Location = new Point(27, 100);
-            label4.Name = "label4";
-            label4.Size = new Size(172, 19);
-            label4.TabIndex = 11;
-            label4.Text = "Thu Nhập Nhiều Nhất:";
-            label4.Click += label4_Click;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Times New Roman", 10.2F, FontStyle.Bold);
-            label3.Location = new Point(318, 239);
-            label3.Name = "label3";
-            label3.Size = new Size(158, 19);
-            label3.TabIndex = 10;
-            label3.Text = "Chi Tiêu Thấp Nhất:";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Times New Roman", 10.2F, FontStyle.Bold);
-            label2.Location = new Point(318, 165);
-            label2.Name = "label2";
-            label2.Size = new Size(105, 19);
-            label2.TabIndex = 9;
-            label2.Text = "Chi Tiêu TB:";
-            // 
-            // txtTNTB
-            // 
-            txtTNTB.Enabled = false;
-            txtTNTB.Location = new Point(27, 187);
-            txtTNTB.Name = "txtTNTB";
-            txtTNTB.Size = new Size(243, 27);
-            txtTNTB.TabIndex = 8;
-            // 
-            // txtTienCon
-            // 
-            txtTienCon.Enabled = false;
-            txtTienCon.Location = new Point(605, 56);
-            txtTienCon.Name = "txtTienCon";
-            txtTienCon.Size = new Size(165, 27);
-            txtTienCon.TabIndex = 7;
-            // 
-            // txtCTTB
-            // 
-            txtCTTB.Enabled = false;
-            txtCTTB.Location = new Point(318, 187);
-            txtCTTB.Name = "txtCTTB";
-            txtCTTB.Size = new Size(243, 27);
-            txtCTTB.TabIndex = 6;
-            // 
-            // txtTC
-            // 
-            txtTC.Enabled = false;
-            txtTC.Location = new Point(318, 56);
-            txtTC.Name = "txtTC";
-            txtTC.Size = new Size(239, 27);
-            txtTC.TabIndex = 5;
-            // 
-            // txtCTTN
-            // 
-            txtCTTN.Enabled = false;
-            txtCTTN.Location = new Point(318, 261);
-            txtCTTN.Name = "txtCTTN";
-            txtCTTN.Size = new Size(243, 27);
-            txtCTTN.TabIndex = 4;
-            // 
-            // txtTNTN
-            // 
-            txtTNTN.Enabled = false;
-            txtTNTN.Location = new Point(27, 261);
-            txtTNTN.Name = "txtTNTN";
-            txtTNTN.Size = new Size(243, 27);
-            txtTNTN.TabIndex = 3;
-            // 
-            // txtCTNN
-            // 
-            txtCTNN.Enabled = false;
-            txtCTNN.Location = new Point(318, 122);
-            txtCTNN.Name = "txtCTNN";
-            txtCTNN.Size = new Size(243, 27);
-            txtCTNN.TabIndex = 2;
-            // 
-            // txtTT
-            // 
-            txtTT.Enabled = false;
-            txtTT.Location = new Point(27, 56);
-            txtTT.Name = "txtTT";
-            txtTT.Size = new Size(243, 27);
-            txtTT.TabIndex = 1;
-            // 
-            // txtTNNN
-            // 
-            txtTNNN.Enabled = false;
-            txtTNNN.Location = new Point(27, 122);
-            txtTNNN.Name = "txtTNNN";
-            txtTNNN.Size = new Size(243, 27);
-            txtTNNN.TabIndex = 0;
-            // 
-            // Home_Page
-            // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(groupBox1);
-            Controls.Add(btnInBaoCao);
-            Controls.Add(label1);
-            Controls.Add(menuStrip1);
-            Icon = (Icon)resources.GetObject("$this.Icon");
-            MainMenuStrip = menuStrip1;
-            MaximumSize = new Size(818, 497);
-            MinimumSize = new Size(818, 497);
-            Name = "Home_Page";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "Trang Chủ";
-            Load += Home_Page_Load;
-            menuStrip1.ResumeLayout(false);
-            menuStrip1.PerformLayout();
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
-            ResumeLayout(false);
-            PerformLayout();
+            this.thôngTinToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { this.DKVSD });
+            this.thôngTinToolStripMenuItem.Name = "thôngTinToolStripMenuItem";
+            this.thôngTinToolStripMenuItem.Size = new Size(131, 24);
+            this.thôngTinToolStripMenuItem.Text = "Quản Lý Sổ Sách";
+
+            this.DKVSD.Name = "DKVSD";
+            this.DKVSD.Size = new Size(224, 26);
+            this.DKVSD.Text = "🎁 Sổ Hỷ Sự & Trả Lễ";
+            this.DKVSD.Click += new EventHandler(this.DKVSD_Click);
+
+            // Header Panel
+            this.pnlHeader.BackColor = Color.DarkSlateBlue;
+            this.pnlHeader.Controls.Add(this.lblWelcome);
+            this.pnlHeader.Controls.Add(this.lblViActive);
+            this.pnlHeader.Controls.Add(this.lblAlertBanner);
+            this.pnlHeader.Location = new Point(15, 36);
+            this.pnlHeader.Size = new Size(1000, 70);
+
+            this.lblWelcome.AutoSize = true;
+            this.lblWelcome.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            this.lblWelcome.ForeColor = Color.White;
+            this.lblWelcome.Location = new Point(15, 8);
+            this.lblWelcome.Text = "🏠 TRANG CHỦ QUẢN LÝ TÀI CHÍNH";
+
+            this.lblViActive.AutoSize = true;
+            this.lblViActive.Font = new Font("Segoe UI", 10F, FontStyle.Italic);
+            this.lblViActive.ForeColor = Color.Gold;
+            this.lblViActive.Location = new Point(15, 42);
+            this.lblViActive.Text = "Ví đang chọn: ---";
+
+            this.lblAlertBanner.AutoSize = true;
+            this.lblAlertBanner.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+            this.lblAlertBanner.ForeColor = Color.Orange;
+            this.lblAlertBanner.Location = new Point(560, 42);
+            this.lblAlertBanner.Text = "📢 Trạng thái ngân sách: Tốt";
+
+            // Dashboard Cards Panel
+            this.pnlCards.Location = new Point(15, 115);
+            this.pnlCards.Size = new Size(1000, 95);
+
+            // Card 1: Tiền Ban Đầu
+            this.cardTienBanDau.BackColor = Color.Lavender;
+            this.cardTienBanDau.BorderStyle = BorderStyle.FixedSingle;
+            this.cardTienBanDau.Controls.Add(this.lblV1);
+            this.cardTienBanDau.Controls.Add(this.lblT1);
+            this.cardTienBanDau.Location = new Point(0, 5);
+            this.cardTienBanDau.Size = new Size(190, 85);
+            this.lblT1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            this.lblT1.Location = new Point(8, 10);
+            this.lblT1.Size = new Size(174, 22);
+            this.lblT1.Text = "💰 TIỀN BAN ĐẦU";
+            this.lblV1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            this.lblV1.ForeColor = Color.DarkBlue;
+            this.lblV1.Location = new Point(8, 38);
+            this.lblV1.Size = new Size(174, 35);
+            this.lblV1.Text = "0 VNĐ";
+
+            // Card 2: Tiền Hiện Có
+            this.cardTienHienCo.BackColor = Color.Honeydew;
+            this.cardTienHienCo.BorderStyle = BorderStyle.FixedSingle;
+            this.cardTienHienCo.Controls.Add(this.lblV2);
+            this.cardTienHienCo.Controls.Add(this.lblT2);
+            this.cardTienHienCo.Location = new Point(202, 5);
+            this.cardTienHienCo.Size = new Size(190, 85);
+            this.lblT2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            this.lblT2.Location = new Point(8, 10);
+            this.lblT2.Size = new Size(174, 22);
+            this.lblT2.Text = "💵 TIỀN HIỆN CÓ";
+            this.lblV2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            this.lblV2.ForeColor = Color.DarkGreen;
+            this.lblV2.Location = new Point(8, 38);
+            this.lblV2.Size = new Size(174, 35);
+            this.lblV2.Text = "0 VNĐ";
+
+            // Card 3: Tổng Thu
+            this.cardTongThu.BackColor = Color.Azure;
+            this.cardTongThu.BorderStyle = BorderStyle.FixedSingle;
+            this.cardTongThu.Controls.Add(this.lblV3);
+            this.cardTongThu.Controls.Add(this.lblT3);
+            this.cardTongThu.Location = new Point(404, 5);
+            this.cardTongThu.Size = new Size(190, 85);
+            this.lblT3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            this.lblT3.Location = new Point(8, 10);
+            this.lblT3.Size = new Size(174, 22);
+            this.lblT3.Text = "📈 TỔNG THU NHẬP";
+            this.lblV3.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            this.lblV3.ForeColor = Color.Teal;
+            this.lblV3.Location = new Point(8, 38);
+            this.lblV3.Size = new Size(174, 35);
+            this.lblV3.Text = "0 VNĐ";
+
+            // Card 4: Tổng Chi
+            this.cardTongChi.BackColor = Color.MistyRose;
+            this.cardTongChi.BorderStyle = BorderStyle.FixedSingle;
+            this.cardTongChi.Controls.Add(this.lblV4);
+            this.cardTongChi.Controls.Add(this.lblT4);
+            this.cardTongChi.Location = new Point(606, 5);
+            this.cardTongChi.Size = new Size(190, 85);
+            this.lblT4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            this.lblT4.Location = new Point(8, 10);
+            this.lblT4.Size = new Size(174, 22);
+            this.lblT4.Text = "📉 TỔNG CHI TIÊU";
+            this.lblV4.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            this.lblV4.ForeColor = Color.DarkRed;
+            this.lblV4.Location = new Point(8, 38);
+            this.lblV4.Size = new Size(174, 35);
+            this.lblV4.Text = "0 VNĐ";
+
+            // Card 5: Thặng Dư
+            this.cardThangDu.BackColor = Color.LemonChiffon;
+            this.cardThangDu.BorderStyle = BorderStyle.FixedSingle;
+            this.cardThangDu.Controls.Add(this.lblV5);
+            this.cardThangDu.Controls.Add(this.lblT5);
+            this.cardThangDu.Location = new Point(808, 5);
+            this.cardThangDu.Size = new Size(190, 85);
+            this.lblT5.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            this.lblT5.Location = new Point(8, 10);
+            this.lblT5.Size = new Size(174, 22);
+            this.lblT5.Text = "💡 THẶNG DƯ NET";
+            this.lblV5.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            this.lblV5.ForeColor = Color.Purple;
+            this.lblV5.Location = new Point(8, 38);
+            this.lblV5.Size = new Size(174, 35);
+            this.lblV5.Text = "0 VNĐ";
+
+            this.pnlCards.Controls.Add(this.cardTienBanDau);
+            this.pnlCards.Controls.Add(this.cardTienHienCo);
+            this.pnlCards.Controls.Add(this.cardTongThu);
+            this.pnlCards.Controls.Add(this.cardTongChi);
+            this.pnlCards.Controls.Add(this.cardThangDu);
+
+            // Shortcuts Group
+            this.grpShortcuts.Controls.Add(this.btnNavKhoiTaoVi);
+            this.grpShortcuts.Controls.Add(this.btnNavThuNhap);
+            this.grpShortcuts.Controls.Add(this.btnNavChiTieu);
+            this.grpShortcuts.Controls.Add(this.btnNavNganSach);
+            this.grpShortcuts.Controls.Add(this.btnNavBaoCao);
+            this.grpShortcuts.Controls.Add(this.btnNavAIChat);
+            this.grpShortcuts.Controls.Add(this.btnNavHySu);
+            this.grpShortcuts.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            this.grpShortcuts.Location = new Point(15, 218);
+            this.grpShortcuts.Name = "grpShortcuts";
+            this.grpShortcuts.Size = new Size(1000, 85);
+            this.grpShortcuts.TabStop = false;
+            this.grpShortcuts.Text = "🚀 PHÍM TẮT THAO TÁC NHANH";
+
+            // Nav Buttons
+            this.btnNavKhoiTaoVi.BackColor = Color.SlateBlue;
+            this.btnNavKhoiTaoVi.ForeColor = Color.White;
+            this.btnNavKhoiTaoVi.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            this.btnNavKhoiTaoVi.Location = new Point(12, 28);
+            this.btnNavKhoiTaoVi.Size = new Size(130, 45);
+            this.btnNavKhoiTaoVi.Text = "💼 Khởi Tạo Ví";
+            this.btnNavKhoiTaoVi.UseVisualStyleBackColor = false;
+            this.btnNavKhoiTaoVi.Click += new EventHandler(this.khoiTaoViToolStripMenuItem_Click);
+
+            this.btnNavThuNhap.BackColor = Color.SeaGreen;
+            this.btnNavThuNhap.ForeColor = Color.White;
+            this.btnNavThuNhap.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            this.btnNavThuNhap.Location = new Point(152, 28);
+            this.btnNavThuNhap.Size = new Size(130, 45);
+            this.btnNavThuNhap.Text = "💵 Ghi Thu Nhập";
+            this.btnNavThuNhap.UseVisualStyleBackColor = false;
+            this.btnNavThuNhap.Click += new EventHandler(this.ThuNhap_Click);
+
+            this.btnNavChiTieu.BackColor = Color.Crimson;
+            this.btnNavChiTieu.ForeColor = Color.White;
+            this.btnNavChiTieu.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            this.btnNavChiTieu.Location = new Point(292, 28);
+            this.btnNavChiTieu.Size = new Size(130, 45);
+            this.btnNavChiTieu.Text = "📉 Ghi Chi Tiêu";
+            this.btnNavChiTieu.UseVisualStyleBackColor = false;
+            this.btnNavChiTieu.Click += new EventHandler(this.ChiTieu_Click);
+
+            this.btnNavNganSach.BackColor = Color.Teal;
+            this.btnNavNganSach.ForeColor = Color.White;
+            this.btnNavNganSach.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            this.btnNavNganSach.Location = new Point(432, 28);
+            this.btnNavNganSach.Size = new Size(135, 45);
+            this.btnNavNganSach.Text = "🎯 Ngân Sách";
+            this.btnNavNganSach.UseVisualStyleBackColor = false;
+            this.btnNavNganSach.Click += new EventHandler(this.nganSachToolStripMenuItem_Click);
+
+            this.btnNavBaoCao.BackColor = Color.DarkOrange;
+            this.btnNavBaoCao.ForeColor = Color.White;
+            this.btnNavBaoCao.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            this.btnNavBaoCao.Location = new Point(577, 28);
+            this.btnNavBaoCao.Size = new Size(135, 45);
+            this.btnNavBaoCao.Text = "📊 Báo Cáo Xịn";
+            this.btnNavBaoCao.UseVisualStyleBackColor = false;
+            this.btnNavBaoCao.Click += new EventHandler(this.baoCaoXinXoToolStripMenuItem_Click);
+
+            this.btnNavAIChat.BackColor = Color.Indigo;
+            this.btnNavAIChat.ForeColor = Color.White;
+            this.btnNavAIChat.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            this.btnNavAIChat.Location = new Point(722, 28);
+            this.btnNavAIChat.Size = new Size(130, 45);
+            this.btnNavAIChat.Text = "🤖 AI Advisor";
+            this.btnNavAIChat.UseVisualStyleBackColor = false;
+            this.btnNavAIChat.Click += new EventHandler(this.aiAdvisorToolStripMenuItem_Click);
+
+            this.btnNavHySu.BackColor = Color.DarkMagenta;
+            this.btnNavHySu.ForeColor = Color.White;
+            this.btnNavHySu.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            this.btnNavHySu.Location = new Point(862, 28);
+            this.btnNavHySu.Size = new Size(125, 45);
+            this.btnNavHySu.Text = "🎁 Sổ Hỷ Sự";
+            this.btnNavHySu.UseVisualStyleBackColor = false;
+            this.btnNavHySu.Click += new EventHandler(this.DKVSD_Click);
+
+            // Chart & Visual Breakdown Group
+            this.grpBieuDo.Controls.Add(this.dgvVisualChart);
+            this.grpBieuDo.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            this.grpBieuDo.Location = new Point(15, 310);
+            this.grpBieuDo.Name = "grpBieuDo";
+            this.grpBieuDo.Size = new Size(1000, 285);
+            this.grpBieuDo.TabStop = false;
+            this.grpBieuDo.Text = "📊 BIỂU ĐỒ & TỔNG HỢP CHI TIÊU THEO DANH MỤC";
+
+            // dgvVisualChart
+            this.dgvVisualChart.AllowUserToAddRows = false;
+            this.dgvVisualChart.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvVisualChart.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvVisualChart.ColumnHeadersHeight = 36;
+            this.dgvVisualChart.Location = new Point(12, 30);
+            this.dgvVisualChart.Name = "dgvVisualChart";
+            this.dgvVisualChart.ReadOnly = true;
+            this.dgvVisualChart.RowHeadersWidth = 51;
+            this.dgvVisualChart.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.dgvVisualChart.Size = new Size(975, 240);
+
+            // Home_Page Form
+            this.ClientSize = new Size(1030, 610);
+            this.Controls.Add(this.grpBieuDo);
+            this.Controls.Add(this.grpShortcuts);
+            this.Controls.Add(this.pnlCards);
+            this.Controls.Add(this.pnlHeader);
+            this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.Icon = (Icon)resources.GetObject("$this.Icon");
+            this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
+            this.Name = "Home_Page";
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.Text = "Trang Chủ Dashboard Quản Lý Tài Chính";
+            this.Load += new EventHandler(this.Home_Page_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.pnlHeader.ResumeLayout(false);
+            this.pnlHeader.PerformLayout();
+            this.pnlCards.ResumeLayout(false);
+            this.cardTienBanDau.ResumeLayout(false);
+            this.cardTienHienCo.ResumeLayout(false);
+            this.cardTongThu.ResumeLayout(false);
+            this.cardTongChi.ResumeLayout(false);
+            this.cardThangDu.ResumeLayout(false);
+            this.grpShortcuts.ResumeLayout(false);
+            this.grpBieuDo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVisualChart)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
         }
 
         #endregion
@@ -392,36 +458,53 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem adminToolStripMenuItem;
         private ToolStripMenuItem QL_User;
-        private ToolStripMenuItem LockScreen;
         private ToolStripMenuItem DoiMk;
+        private ToolStripMenuItem khóaMànHìnhToolStripMenuItem;
         private ToolStripMenuItem Out;
         private ToolStripMenuItem thuChiToolStripMenuItem;
+        private ToolStripMenuItem khoiTaoViToolStripMenuItem;
         private ToolStripMenuItem ThuNhap;
         private ToolStripMenuItem ChiTieu;
+        private ToolStripMenuItem nganSachToolStripMenuItem;
+        private ToolStripMenuItem dauTuVayNoToolStripMenuItem;
+        private ToolStripMenuItem phanTichToolStripMenuItem;
+        private ToolStripMenuItem baoCaoXinXoToolStripMenuItem;
+        private ToolStripMenuItem aiAdvisorToolStripMenuItem;
         private ToolStripMenuItem thôngTinToolStripMenuItem;
         private ToolStripMenuItem DKVSD;
-        private ToolStripMenuItem User;
-        private Label label1;
-        private Button btnInBaoCao;
-        private GroupBox groupBox1;
-        private Label label9;
-        private Label label8;
-        private Label label7;
-        private Label label6;
-        private Label label5;
-        private Label label4;
-        private Label label3;
-        private Label label2;
-        private TextBox txtTNTB;
-        private TextBox txtTienCon;
-        private TextBox txtCTTB;
-        private TextBox txtTC;
-        private TextBox txtCTTN;
-        private TextBox txtTNTN;
-        private TextBox txtCTNN;
-        private TextBox txtTT;
-        private TextBox txtTNNN;
-        private Label label10;
-        private ToolStripMenuItem khóaMànHìnhToolStripMenuItem;
+
+        private Panel pnlHeader;
+        private Label lblWelcome;
+        private Label lblViActive;
+        private Label lblAlertBanner;
+
+        private Panel pnlCards;
+        private Panel cardTienBanDau;
+        private Label lblT1;
+        private Label lblV1;
+        private Panel cardTienHienCo;
+        private Label lblT2;
+        private Label lblV2;
+        private Panel cardTongThu;
+        private Label lblT3;
+        private Label lblV3;
+        private Panel cardTongChi;
+        private Label lblT4;
+        private Label lblV4;
+        private Panel cardThangDu;
+        private Label lblT5;
+        private Label lblV5;
+
+        private GroupBox grpShortcuts;
+        private Button btnNavKhoiTaoVi;
+        private Button btnNavThuNhap;
+        private Button btnNavChiTieu;
+        private Button btnNavNganSach;
+        private Button btnNavBaoCao;
+        private Button btnNavAIChat;
+        private Button btnNavHySu;
+
+        private GroupBox grpBieuDo;
+        private DataGridView dgvVisualChart;
     }
 }

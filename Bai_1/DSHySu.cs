@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,7 +21,7 @@ namespace Bai_1
 
         public void Reload()
         {
-            string sql = $"EXEC sp_XemDSKhachMoi @AccountID = {SaveIdUser.AccountID};";
+            string sql = $"EXEC sp_XemDSKhachMoiV2 @AccountID = {SaveIdUser.AccountID};";
             ResultStyle.ApplyStyle(dataGridView1);
             dataGridView1.DataSource = dt.TruyVan(sql);
         }

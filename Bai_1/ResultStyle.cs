@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,14 +25,17 @@ namespace Bai_1
             dgv.EnableHeadersVisualStyles = false;
             dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(52, 152, 219);
             dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgv.ColumnHeadersHeight = 40;
+            dgv.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
+            dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgv.ColumnHeadersHeight = 36;
 
             // Dòng dữ liệu
-            dgv.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+            dgv.DefaultCellStyle.Font = new Font("Segoe UI", 9.5F);
             dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(46, 204, 113);
             dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgv.RowHeadersVisible = false;
 
             // Chiều cao dòng
             dgv.RowTemplate.Height = 35;

@@ -8,8 +8,7 @@
     ".NETCoreApp,Version=v8.0": {
       "Bai_1/1.0.0": {
         "dependencies": {
-          "Microsoft.Data.SqlClient": "6.1.3",
-          "System.Drawing.Common": "10.0.1"
+          "Microsoft.Data.SqlClient": "6.1.3"
         },
         "runtime": {
           "Bai_1.dll": {}
@@ -310,22 +309,6 @@
           }
         }
       },
-      "Microsoft.Win32.SystemEvents/10.0.1": {
-        "runtime": {
-          "lib/net8.0/Microsoft.Win32.SystemEvents.dll": {
-            "assemblyVersion": "10.0.0.0",
-            "fileVersion": "10.0.125.57005"
-          }
-        },
-        "runtimeTargets": {
-          "runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.dll": {
-            "rid": "win",
-            "assetType": "runtime",
-            "assemblyVersion": "10.0.0.0",
-            "fileVersion": "10.0.125.57005"
-          }
-        }
-      },
       "System.ClientModel/1.5.1": {
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "8.0.3",
@@ -362,25 +345,6 @@
             "assetType": "runtime",
             "assemblyVersion": "8.0.0.0",
             "fileVersion": "8.0.1024.46610"
-          }
-        }
-      },
-      "System.Drawing.Common/10.0.1": {
-        "dependencies": {
-          "Microsoft.Win32.SystemEvents": "10.0.1"
-        },
-        "runtime": {
-          "lib/net8.0/System.Drawing.Common.dll": {
-            "assemblyVersion": "10.0.0.0",
-            "fileVersion": "10.0.125.57005"
-          },
-          "lib/net8.0/System.Private.Windows.Core.dll": {
-            "assemblyVersion": "10.0.0.0",
-            "fileVersion": "10.0.125.57005"
-          },
-          "lib/net8.0/System.Private.Windows.GdiPlus.dll": {
-            "assemblyVersion": "10.0.0.0",
-            "fileVersion": "10.0.125.57005"
           }
         }
       },
@@ -575,13 +539,6 @@
       "path": "microsoft.sqlserver.server/1.0.0",
       "hashPath": "microsoft.sqlserver.server.1.0.0.nupkg.sha512"
     },
-    "Microsoft.Win32.SystemEvents/10.0.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-trU4LN2C04nj5qnl8HqoX0NJGPCFg9h2f5o+jjp3Xm8c8fQtu6Ga1/fNFMf3AapoHyLP1WlP21XnL2ij/TLKlg==",
-      "path": "microsoft.win32.systemevents/10.0.1",
-      "hashPath": "microsoft.win32.systemevents.10.0.1.nupkg.sha512"
-    },
     "System.ClientModel/1.5.1": {
       "type": "package",
       "serviceable": true,
@@ -602,13 +559,6 @@
       "sha512": "sha512-n1ZP7NM2Gkn/MgD8+eOT5MulMj6wfeQMNS2Pizvq5GHCZfjlFMXV2irQlQmJhwA2VABC57M0auudO89Iu2uRLg==",
       "path": "system.diagnostics.eventlog/8.0.1",
       "hashPath": "system.diagnostics.eventlog.8.0.1.nupkg.sha512"
-    },
-    "System.Drawing.Common/10.0.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-cmkIduwyVPfuO8kNehu3xNcjo26nMgUoJyfso9S/zTO85YovvPPG0/AFLjanx1iVgQ80OpJVnLb1jU3aIKNLdg==",
-      "path": "system.drawing.common/10.0.1",
-      "hashPath": "system.drawing.common.10.0.1.nupkg.sha512"
     },
     "System.IdentityModel.Tokens.Jwt/7.7.1": {
       "type": "package",

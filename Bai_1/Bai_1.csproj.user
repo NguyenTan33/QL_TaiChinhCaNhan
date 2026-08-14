@@ -7,9 +7,6 @@
     <Compile Update="Chi_Tieu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Dki.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="DoiMatKhau.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -17,6 +14,27 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormAIChatbox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormBaoCaoTaiChinh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormDauTuVayNo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormKhoiTaoVi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormPhanTichDuLieu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormQuanLyNganSach.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormQuenMatKhau.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Home Page.cs">

@@ -1,4 +1,4 @@
-﻿using Microsoft.Identity.Client;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,30 +22,35 @@ namespace Bai_1
         }
         public void reload()
         {
-            string sql = $"Exec sp_ThuNhap_Select @AccountID = {SaveIdUser.AccountID}";
+            dt.EnsureUserDefaultWallet(SaveIdUser.AccountID);
+            string sql = SaveIdUser.CurrentWalletID > 0
+                ? $"EXEC sp_ThuNhap_SelectByWallet @WalletID = {SaveIdUser.CurrentWalletID};"
+                : $"Exec sp_ThuNhap_Select @AccountID = {SaveIdUser.AccountID};";
             ResultStyle.ApplyStyle(Result);
             Result.DataSource = dt.TruyVan(sql);
         }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            double Luong = double.Parse(txtTienHienCo.Text);
-            double Thuong = double.Parse(txtThuNhap.Text);
-            double Khac = double.Parse(txtKhac.Text);
+            double.TryParse(txtTienHienCo.Text, out double Luong);
+            double.TryParse(txtThuNhap.Text, out double Thuong);
+            double.TryParse(txtKhac.Text, out double Khac);
             string Ngay = NgayThang.Value.ToString("yyyy-MM-dd");
-            string sql = $@"EXEC sp_ThuNhap_Insert 
+
+            string sql = $@"EXEC sp_ThuNhap_InsertV2 
                                 @Luong = {Luong},
                                 @Thuong = {Thuong},
                                 @Khac = {Khac},
                                 @Ngay = '{Ngay}',
-                                @AccountID = {SaveIdUser.AccountID};";
+                                @AccountID = {SaveIdUser.AccountID},
+                                @WalletID = {SaveIdUser.CurrentWalletID};";
             dt.ExecuteNonQuery(sql);
             reload();
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            int ID = int.Parse(Id.Text);
+            if (!int.TryParse(Id.Text, out int ID)) return;
             string sql = $"EXEC sp_ThuNhap_Delete @ID = {ID};";
             dt.ExecuteNonQuery(sql);
             reload();
@@ -53,10 +58,10 @@ namespace Bai_1
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            int ID = int.Parse(Id.Text);
-            double Luong = double.Parse(txtTienHienCo.Text);
-            double Thuong = double.Parse(txtThuNhap.Text);
-            double Khac = double.Parse(txtKhac.Text);
+            if (!int.TryParse(Id.Text, out int ID)) return;
+            double.TryParse(txtTienHienCo.Text, out double Luong);
+            double.TryParse(txtThuNhap.Text, out double Thuong);
+            double.TryParse(txtKhac.Text, out double Khac);
             string Ngay = NgayThang.Value.ToString("yyyy-MM-dd");
             string sql = $@"EXEC sp_ThuNhap_Update
                                 @ID = {ID},
@@ -70,13 +75,14 @@ namespace Bai_1
 
         private void btnDuDoan_Click(object sender, EventArgs e)
         {
+            FormAIChatbox chat = new FormAIChatbox();
+            chat.ShowDialog();
         }
 
         private void btnLoiKhuyen_Click(object sender, EventArgs e)
         {
-
-            string sql = $"EXEC sp_DanhGiaThuNhap @AccountID = {SaveIdUser.AccountID};";
-            Result.DataSource = dt.TruyVan(sql);
+            FormAIChatbox chat = new FormAIChatbox();
+            chat.ShowDialog();
         }
 
         private void btnOut_Click(object sender, EventArgs e)
