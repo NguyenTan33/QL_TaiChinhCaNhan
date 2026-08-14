@@ -25,6 +25,9 @@
     <Compile Update="FormDauTuVayNo.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormDoiSoatChotSo.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="FormKhoiTaoVi.cs">
       <SubType>Form</SubType>
     </Compile>
