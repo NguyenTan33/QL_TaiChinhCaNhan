@@ -601,6 +601,113 @@ namespace Bai_1
         {
             return TruyVan($"EXEC sp_PhanTich_DauTuROI @WalletID = {walletId};");
         }
+
+        public bool PerformChotSo(int walletId, int accountId, decimal tienThucTe, string ghiChu, out decimal tienHeThong, out decimal chenhLech, out string thongBao)
+        {
+            tienHeThong = 0;
+            chenhLech = 0;
+            thongBao = "";
+            try
+            {
+                using (SqlConnection conn = TaoKetNoi())
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("sp_ChotSo_Perform", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@WalletID", walletId);
+                    cmd.Parameters.AddWithValue("@AccountID", accountId);
+                    cmd.Parameters.AddWithValue("@TienThucTe", tienThucTe);
+                    cmd.Parameters.AddWithValue("@GhiChu", (object?)ghiChu ?? DBNull.Value);
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            tienHeThong = Convert.ToDecimal(dr["TienHeThong"]);
+                            tienThucTe = Convert.ToDecimal(dr["TienThucTe"]);
+                            chenhLech = Convert.ToDecimal(dr["ChenhLech"]);
+                            thongBao = dr["ThongBao"].ToString() ?? "";
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                thongBao = ex.Message;
+            }
+            return false;
+        }
+
+        public DataTable GetLichSuChotSo(int walletId)
+        {
+            try
+            {
+                using (SqlConnection conn = TaoKetNoi())
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("sp_ChotSo_GetHistory", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@WalletID", walletId);
+                    SqlDataAdapter ad = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    ad.Fill(dt);
+                    return dt;
+                }
+            }
+            catch
+            {
+                return new DataTable();
+            }
+        }
+
+        public DataTable GetBaoCaoDashboard(int walletId, int? thang, int? nam)
+        {
+            try
+            {
+                using (SqlConnection conn = TaoKetNoi())
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("sp_BaoCaoChuyenSauV2", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@WalletID", walletId);
+                    cmd.Parameters.AddWithValue("@Thang", (object?)thang ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Nam", (object?)nam ?? DBNull.Value);
+                    SqlDataAdapter ad = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    ad.Fill(dt);
+                    return dt;
+                }
+            }
+            catch
+            {
+                return new DataTable();
+            }
+        }
+
+        public DataTable GetVisualCategoryChartFiltered(int walletId, int? thang, int? nam)
+        {
+            try
+            {
+                using (SqlConnection conn = TaoKetNoi())
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("sp_PhanTich_DanhMucTyTrongFilter", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@WalletID", walletId);
+                    cmd.Parameters.AddWithValue("@Thang", (object?)thang ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Nam", (object?)nam ?? DBNull.Value);
+                    SqlDataAdapter ad = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    ad.Fill(dt);
+                    return dt;
+                }
+            }
+            catch
+            {
+                return new DataTable();
+            }
+        }
     }
 }
 

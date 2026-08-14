@@ -34,6 +34,7 @@ namespace Bai_1
             this.ThuNhap = new ToolStripMenuItem();
             this.ChiTieu = new ToolStripMenuItem();
             this.nganSachToolStripMenuItem = new ToolStripMenuItem();
+            this.chotSoToolStripMenuItem = new ToolStripMenuItem();
             this.dauTuVayNoToolStripMenuItem = new ToolStripMenuItem();
             this.phanTichToolStripMenuItem = new ToolStripMenuItem();
             this.baoCaoXinXoToolStripMenuItem = new ToolStripMenuItem();
@@ -45,6 +46,14 @@ namespace Bai_1
             this.lblWelcome = new Label();
             this.lblViActive = new Label();
             this.lblAlertBanner = new Label();
+
+            this.pnlFilterDate = new Panel();
+            this.lblFilterTitle = new Label();
+            this.lblLabelNam = new Label();
+            this.cboNam = new ComboBox();
+            this.lblLabelThang = new Label();
+            this.cboThang = new ComboBox();
+            this.lblFilterStatus = new Label();
 
             // Cards Panel
             this.pnlCards = new Panel();
@@ -140,6 +149,7 @@ namespace Bai_1
                 this.ThuNhap,
                 this.ChiTieu,
                 this.nganSachToolStripMenuItem,
+                this.chotSoToolStripMenuItem,
                 this.dauTuVayNoToolStripMenuItem,
                 this.phanTichToolStripMenuItem,
                 this.baoCaoXinXoToolStripMenuItem,
@@ -148,6 +158,11 @@ namespace Bai_1
             this.thuChiToolStripMenuItem.Name = "thuChiToolStripMenuItem";
             this.thuChiToolStripMenuItem.Size = new Size(128, 24);
             this.thuChiToolStripMenuItem.Text = "Quản Lý Thu Chi";
+
+            this.chotSoToolStripMenuItem.Name = "chotSoToolStripMenuItem";
+            this.chotSoToolStripMenuItem.Size = new Size(260, 26);
+            this.chotSoToolStripMenuItem.Text = "🔒 Đối Soát & Chốt Sổ Tài Chính";
+            this.chotSoToolStripMenuItem.Click += new EventHandler(this.chotSoToolStripMenuItem_Click);
 
             this.phanTichToolStripMenuItem.Name = "phanTichToolStripMenuItem";
             this.phanTichToolStripMenuItem.Size = new Size(260, 26);
@@ -226,8 +241,54 @@ namespace Bai_1
             this.lblAlertBanner.Location = new Point(560, 42);
             this.lblAlertBanner.Text = "📢 Trạng thái ngân sách: Tốt";
 
+            // Date Filter Panel
+            this.pnlFilterDate.BackColor = Color.LightSteelBlue;
+            this.pnlFilterDate.BorderStyle = BorderStyle.FixedSingle;
+            this.pnlFilterDate.Controls.Add(this.lblFilterTitle);
+            this.pnlFilterDate.Controls.Add(this.lblLabelNam);
+            this.pnlFilterDate.Controls.Add(this.cboNam);
+            this.pnlFilterDate.Controls.Add(this.lblLabelThang);
+            this.pnlFilterDate.Controls.Add(this.cboThang);
+            this.pnlFilterDate.Controls.Add(this.lblFilterStatus);
+            this.pnlFilterDate.Location = new Point(15, 112);
+            this.pnlFilterDate.Size = new Size(1000, 48);
+
+            this.lblFilterTitle.AutoSize = true;
+            this.lblFilterTitle.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            this.lblFilterTitle.ForeColor = Color.DarkSlateBlue;
+            this.lblFilterTitle.Location = new Point(12, 12);
+            this.lblFilterTitle.Text = "🗓️ BỘ LỌC THỜI GIAN:";
+
+            this.lblLabelNam.AutoSize = true;
+            this.lblLabelNam.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+            this.lblLabelNam.Location = new Point(200, 13);
+            this.lblLabelNam.Text = "Năm:";
+
+            this.cboNam.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.cboNam.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+            this.cboNam.Location = new Point(245, 9);
+            this.cboNam.Size = new Size(160, 29);
+            this.cboNam.SelectedIndexChanged += new EventHandler(this.cboDateFilter_SelectedIndexChanged);
+
+            this.lblLabelThang.AutoSize = true;
+            this.lblLabelThang.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+            this.lblLabelThang.Location = new Point(420, 13);
+            this.lblLabelThang.Text = "Tháng:";
+
+            this.cboThang.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.cboThang.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+            this.cboThang.Location = new Point(475, 9);
+            this.cboThang.Size = new Size(210, 29);
+            this.cboThang.SelectedIndexChanged += new EventHandler(this.cboDateFilter_SelectedIndexChanged);
+
+            this.lblFilterStatus.AutoSize = true;
+            this.lblFilterStatus.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            this.lblFilterStatus.ForeColor = Color.MidnightBlue;
+            this.lblFilterStatus.Location = new Point(700, 14);
+            this.lblFilterStatus.Text = "📢 Tất cả thời gian";
+
             // Dashboard Cards Panel
-            this.pnlCards.Location = new Point(15, 115);
+            this.pnlCards.Location = new Point(15, 168);
             this.pnlCards.Size = new Size(1000, 95);
 
             // Card 1: Tiền Ban Đầu
@@ -330,7 +391,7 @@ namespace Bai_1
             this.grpShortcuts.Controls.Add(this.btnNavAIChat);
             this.grpShortcuts.Controls.Add(this.btnNavHySu);
             this.grpShortcuts.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            this.grpShortcuts.Location = new Point(15, 218);
+            this.grpShortcuts.Location = new Point(15, 271);
             this.grpShortcuts.Name = "grpShortcuts";
             this.grpShortcuts.Size = new Size(1000, 85);
             this.grpShortcuts.TabStop = false;
@@ -403,9 +464,9 @@ namespace Bai_1
             // Chart & Visual Breakdown Group
             this.grpBieuDo.Controls.Add(this.dgvVisualChart);
             this.grpBieuDo.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            this.grpBieuDo.Location = new Point(15, 310);
+            this.grpBieuDo.Location = new Point(15, 364);
             this.grpBieuDo.Name = "grpBieuDo";
-            this.grpBieuDo.Size = new Size(1000, 285);
+            this.grpBieuDo.Size = new Size(1000, 280);
             this.grpBieuDo.TabStop = false;
             this.grpBieuDo.Text = "📊 BIỂU ĐỒ & TỔNG HỢP CHI TIÊU THEO DANH MỤC";
 
@@ -419,13 +480,14 @@ namespace Bai_1
             this.dgvVisualChart.ReadOnly = true;
             this.dgvVisualChart.RowHeadersWidth = 51;
             this.dgvVisualChart.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.dgvVisualChart.Size = new Size(975, 240);
+            this.dgvVisualChart.Size = new Size(975, 235);
 
             // Home_Page Form
-            this.ClientSize = new Size(1030, 610);
+            this.ClientSize = new Size(1030, 660);
             this.Controls.Add(this.grpBieuDo);
             this.Controls.Add(this.grpShortcuts);
             this.Controls.Add(this.pnlCards);
+            this.Controls.Add(this.pnlFilterDate);
             this.Controls.Add(this.pnlHeader);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -466,6 +528,7 @@ namespace Bai_1
         private ToolStripMenuItem ThuNhap;
         private ToolStripMenuItem ChiTieu;
         private ToolStripMenuItem nganSachToolStripMenuItem;
+        private ToolStripMenuItem chotSoToolStripMenuItem;
         private ToolStripMenuItem dauTuVayNoToolStripMenuItem;
         private ToolStripMenuItem phanTichToolStripMenuItem;
         private ToolStripMenuItem baoCaoXinXoToolStripMenuItem;
@@ -477,6 +540,14 @@ namespace Bai_1
         private Label lblWelcome;
         private Label lblViActive;
         private Label lblAlertBanner;
+
+        private Panel pnlFilterDate;
+        private Label lblFilterTitle;
+        private Label lblLabelNam;
+        private ComboBox cboNam;
+        private Label lblLabelThang;
+        private ComboBox cboThang;
+        private Label lblFilterStatus;
 
         private Panel pnlCards;
         private Panel cardTienBanDau;

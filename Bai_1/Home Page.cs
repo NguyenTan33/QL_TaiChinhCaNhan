@@ -14,10 +14,38 @@ namespace Bai_1
             InitializeComponent();
         }
 
+        private bool _isInitializingFilter = true;
+
         private void Home_Page_Load(object sender, EventArgs e)
         {
             _dt.EnsureUserDefaultWallet(SaveIdUser.AccountID);
             PhanQuyen();
+            InitFilterControls();
+            _isInitializingFilter = false;
+            LoadDashboard();
+        }
+
+        private void InitFilterControls()
+        {
+            cboNam.Items.Clear();
+            cboNam.Items.Add("Tất Cả Các Năm");
+            cboNam.Items.Add("Năm 2026");
+            cboNam.Items.Add("Năm 2025");
+            cboNam.Items.Add("Năm 2024");
+            cboNam.SelectedIndex = 1; // Default: 2026
+
+            cboThang.Items.Clear();
+            cboThang.Items.Add("Tất Cả Các Tháng (Cả Năm)");
+            for (int i = 1; i <= 12; i++)
+            {
+                cboThang.Items.Add($"Tháng {i}");
+            }
+            cboThang.SelectedIndex = 0; // Default: Tất cả các tháng
+        }
+
+        private void cboDateFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_isInitializingFilter) return;
             LoadDashboard();
         }
 
@@ -36,8 +64,27 @@ namespace Bai_1
             lblWelcome.Text = $"🏠 CHÀO MỪNG {SaveIdUser.AccountUserName.ToUpper()} TRỞ LẠI!";
             lblViActive.Text = $"Ví đang chọn: {SaveIdUser.CurrentWalletName} ({SaveIdUser.CurrentWalletRole}) - Mã ví chung: {SaveIdUser.CurrentWalletCode}";
 
-            // Tải số liệu Dashboard Cards từ Stored Procedure sp_BaoCaoChuyenSau
-            DataTable dtBaoCao = _dt.TruyVan($"EXEC sp_BaoCaoChuyenSau @WalletID = {SaveIdUser.CurrentWalletID};");
+            // Đọc thông số lọc Tháng & Năm
+            int? selectedNam = cboNam.SelectedIndex > 0 ? (2027 - cboNam.SelectedIndex) : (int?)null;
+            int? selectedThang = cboThang.SelectedIndex > 0 ? cboThang.SelectedIndex : (int?)null;
+
+            string strFilterText = "";
+            if (selectedNam.HasValue && selectedThang.HasValue)
+            {
+                strFilterText = $"📢 Đang lọc: Tháng {selectedThang.Value} / {selectedNam.Value}";
+            }
+            else if (selectedNam.HasValue)
+            {
+                strFilterText = $"📢 Đang lọc: Cả Năm {selectedNam.Value}";
+            }
+            else
+            {
+                strFilterText = "📢 Đang lọc: Tất cả các tháng / năm";
+            }
+            lblFilterStatus.Text = strFilterText;
+
+            // Tải số liệu Dashboard Cards từ Stored Procedure sp_BaoCaoChuyenSauV2
+            DataTable dtBaoCao = _dt.GetBaoCaoDashboard(SaveIdUser.CurrentWalletID, selectedThang, selectedNam);
             if (dtBaoCao != null && dtBaoCao.Rows.Count > 0)
             {
                 DataRow r = dtBaoCao.Rows[0];
@@ -56,7 +103,7 @@ namespace Bai_1
                 // Alert Banner
                 if (tongThu > 0 && (tongChi / tongThu) > 0.8m)
                 {
-                    lblAlertBanner.Text = "⚠️ CẢNH BÁO: Bạn đã chi hơn 80% thu nhập!";
+                    lblAlertBanner.Text = "⚠️ CẢNH BÁO: Bạn đã chi hơn 80% thu nhập trong thời gian này!";
                     lblAlertBanner.ForeColor = Color.OrangeRed;
                 }
                 else if (tienHienCo < 1000000)
@@ -71,25 +118,13 @@ namespace Bai_1
                 }
             }
 
-            // Load Biểu Đồ Thống Kê Chi Tiêu Tỷ Trọng Theo Danh Mục
-            LoadVisualCategoryChart();
+            // Load Biểu Đồ Thống Kê Chi Tiêu Tỷ Trọng Theo Danh Mục Lọc Theo Thời Gian
+            LoadVisualCategoryChart(selectedThang, selectedNam);
         }
 
-        private void LoadVisualCategoryChart()
+        private void LoadVisualCategoryChart(int? thang, int? nam)
         {
-            string sql = $@"
-                SELECT 
-                    c.DanhMuc AS [Danh Mục Chi Tiêu],
-                    SUM(c.SoTien) AS [Tổng Tiền Chi (VNĐ)],
-                    COUNT(*) AS [Số Lần Chi],
-                    CAST(ROUND(SUM(c.SoTien) * 100.0 / NULLIF((SELECT SUM(SoTien) FROM ChiTieu WHERE WalletID = {SaveIdUser.CurrentWalletID}), 0), 1) AS NVARCHAR(20)) + '%' AS [Tỷ Trọng (%)],
-                    REPLICATE('█', CAST(ROUND(SUM(c.SoTien) * 20.0 / NULLIF((SELECT SUM(SoTien) FROM ChiTieu WHERE WalletID = {SaveIdUser.CurrentWalletID}), 0), 0) AS INT)) AS [Biểu Đồ Trực Quan]
-                FROM ChiTieu c
-                WHERE c.WalletID = {SaveIdUser.CurrentWalletID}
-                GROUP BY c.DanhMuc
-                ORDER BY [Tổng Tiền Chi (VNĐ)] DESC;";
-
-            DataTable dt = _dt.TruyVan(sql);
+            DataTable dt = _dt.GetVisualCategoryChartFiltered(SaveIdUser.CurrentWalletID, thang, nam);
             ResultStyle.ApplyStyle(dgvVisualChart);
             dgvVisualChart.DataSource = dt;
         }
@@ -182,6 +217,13 @@ namespace Bai_1
         {
             FormPhanTichDuLieu formPT = new FormPhanTichDuLieu();
             formPT.ShowDialog();
+            LoadDashboard();
+        }
+
+        private void chotSoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormDoiSoatChotSo formCS = new FormDoiSoatChotSo();
+            formCS.ShowDialog();
             LoadDashboard();
         }
     }
